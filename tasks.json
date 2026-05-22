@@ -1,15 +1,5 @@
 [
   {
-    "id": "d3a90fba-f839-47b6-8cbf-9128202299a0",
-    "title": "task1",
-    "description": "",
-    "status": "Backlog",
-    "priority": "Medium",
-    "dueDate": null,
-    "comments": [],
-    "createdAt": "2026-05-22T15:40:42.201Z"
-  },
-  {
     "id": "d39c9015-6efb-4763-bea5-03b3b9dea4ec",
     "title": "task2",
     "description": "",
