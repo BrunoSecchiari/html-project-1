@@ -1,15 +1,5 @@
 [
   {
-    "id": "d39c9015-6efb-4763-bea5-03b3b9dea4ec",
-    "title": "task2",
-    "description": "",
-    "status": "In Progress",
-    "priority": "Medium",
-    "dueDate": null,
-    "comments": [],
-    "createdAt": "2026-05-22T15:40:46.974Z"
-  },
-  {
     "id": "15ba615d-b92d-4659-a9e2-1eae7fff2d1d",
     "title": "task3",
     "description": "",
