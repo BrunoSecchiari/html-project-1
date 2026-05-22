@@ -48,5 +48,15 @@
     "dueDate": null,
     "comments": [],
     "createdAt": "2026-05-22T17:31:42.410Z"
+  },
+  {
+    "id": "62d28bab-2bcb-402c-ba1b-bc27397ed677",
+    "title": "Journal Entries Tile",
+    "description": "",
+    "status": "Backlog",
+    "priority": "Medium",
+    "dueDate": null,
+    "comments": [],
+    "createdAt": "2026-05-22T17:32:18.376Z"
   }
 ]
