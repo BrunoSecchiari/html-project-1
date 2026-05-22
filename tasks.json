@@ -48,5 +48,15 @@
     "dueDate": null,
     "comments": [],
     "createdAt": "2026-05-22T17:31:37.570Z"
+  },
+  {
+    "id": "39a0683f-f285-48c8-a781-77f96630e361",
+    "title": "Jobotx",
+    "description": "",
+    "status": "Backlog",
+    "priority": "Medium",
+    "dueDate": null,
+    "comments": [],
+    "createdAt": "2026-05-22T17:31:42.410Z"
   }
 ]
