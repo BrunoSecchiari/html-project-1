@@ -13,6 +13,13 @@
         "authorLastName": "Secchiari",
         "text": "Comment 1",
         "timestamp": "2026-05-22T15:22:53.300Z"
+      },
+      {
+        "id": "2209367b-af96-4e6d-b5bb-5695e6eb1982",
+        "authorFirstName": "Bruno",
+        "authorLastName": "Secchiari",
+        "text": "Comment 2",
+        "timestamp": "2026-05-22T15:22:56.515Z"
       }
     ],
     "createdAt": "2026-05-22T15:22:14.668Z"
