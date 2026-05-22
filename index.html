@@ -37,9 +37,11 @@
   --info-bg: #eef3ff;
   --info-text: #3a5cbf;
 
-  --orange-bg: #fff3e6;
-  --orange-text: #c45f00;
   --orange-bar: #e07a20;
+
+  --seg-backlog:    #9b9baf;
+  --seg-inprogress: #6161ff;
+  --seg-completed:  #1a7a4a;
 
   --radius-sm: 6px;
   --radius-md: 8px;
@@ -51,9 +53,9 @@
   --shadow-md: 0 4px 16px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.04);
   --shadow-lg: 0 8px 32px rgba(0,0,0,.12), 0 2px 8px rgba(0,0,0,.06);
 
-  --header-h: 56px;
-  --dashboard-h: 96px;
-  --toolbar-h: 52px;
+  --header-h:    56px;
+  --dashboard-h: 84px;
+  --toolbar-h:   52px;
 
   --font: 'Inter', -apple-system, sans-serif;
 }
@@ -80,9 +82,10 @@
   --error-text: #e06060;
   --info-bg: #0d1a3a;
   --info-text: #7090e8;
-  --orange-bg: #2a1500;
-  --orange-text: #f0a050;
   --orange-bar: #f0a050;
+  --seg-backlog:    #60607a;
+  --seg-inprogress: #7b7bff;
+  --seg-completed:  #4cbb7a;
 }
 
 /* ── Reset ───────────────────────────────────────────────────────── */
@@ -114,9 +117,9 @@ input, select, textarea { font-family: var(--font); }
 }
 .brand-dot span { color: #fff; font-weight: 700; font-size: 13px; letter-spacing: -.5px; }
 .header-titles { min-width: 0; }
-.header-title { font-size: 14px; font-weight: 600; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.3; }
+.header-title    { font-size: 14px; font-weight: 600; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.3; }
 .header-subtitle { font-size: 11px; color: var(--text-tertiary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.3; }
-.header-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.header-actions  { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
 
 /* Sync chip */
 #sync-chip {
@@ -129,8 +132,8 @@ input, select, textarea { font-family: var(--font); }
   cursor: default;
 }
 #sync-chip.synced { background: var(--success-bg); color: var(--success-text); border-color: transparent; }
-#sync-chip.saving { background: var(--info-bg); color: var(--info-text); border-color: transparent; }
-#sync-chip.failed  { background: var(--error-bg);  color: var(--error-text);  border-color: transparent; }
+#sync-chip.saving { background: var(--info-bg);    color: var(--info-text);    border-color: transparent; }
+#sync-chip.failed { background: var(--error-bg);   color: var(--error-text);   border-color: transparent; }
 .sync-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
 #sync-chip.saving .sync-dot { animation: blink 1s infinite; }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
@@ -144,46 +147,57 @@ input, select, textarea { font-family: var(--font); }
 }
 .icon-btn:hover { background: var(--bg-hover); color: var(--text-primary); }
 
-/* ── DASHBOARD ───────────────────────────────────────────────────── */
+/* ── DASHBOARD — segmented bar ───────────────────────────────────── */
 #dashboard {
   position: fixed; top: var(--header-h); left: 0; right: 0; z-index: 800;
   height: var(--dashboard-h);
   background: var(--surface);
   border-bottom: 1px solid var(--surface-border);
-  display: flex; align-items: center; justify-content: center;
-  padding: 0 24px; gap: 12px;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 0 28px; gap: 10px;
 }
-.metric-card {
-  width: 200px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--surface-border);
-  border-radius: var(--radius-lg);
-  padding: 14px 18px;
-  display: flex; flex-direction: column; gap: 6px;
-  flex-shrink: 0;
-}
-.metric-top { display: flex; align-items: baseline; justify-content: space-between; }
-.metric-label { font-size: 11px; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: .6px; }
-.metric-value { font-size: 26px; font-weight: 700; line-height: 1; }
-.metric-value.c-accent  { color: var(--accent); }
-.metric-value.c-orange  { color: var(--orange-bar); }
-.metric-value.c-green   { color: var(--success-text); }
-.metric-value.c-default { color: var(--text-primary); }
-.metric-pct { font-size: 11px; font-weight: 500; color: var(--text-tertiary); }
 
-/* Progress bar */
-.metric-bar-track {
-  width: 100%; height: 5px; border-radius: var(--radius-pill);
-  background: var(--bg-tertiary); overflow: hidden;
+/* Stats row: four labels + counts sitting above the bar */
+.dash-stats {
+  display: flex; align-items: flex-end;
+  width: 100%; gap: 0;
 }
-.metric-bar-fill {
+.dash-stat {
+  display: flex; flex-direction: column; gap: 2px;
+  overflow: hidden; min-width: 0; padding-right: 28px;
+}
+.dash-stat:last-child { padding-right: 0; }
+/* "All Tasks" is fixed-width; the other three flex with their segment */
+.dash-stat.s-all { flex-shrink: 0; min-width: 100px; }
+.dash-stat.s-backlog, .dash-stat.s-inprog, .dash-stat.s-done {
+  transition: flex .45s cubic-bezier(.4,0,.2,1);
+}
+.dash-stat-label {
+  font-size: 11px; font-weight: 500; color: var(--text-tertiary);
+  white-space: nowrap;
+}
+.dash-stat-count {
+  font-size: 22px; font-weight: 700; line-height: 1; white-space: nowrap;
+}
+.dash-stat-count.c-all     { color: var(--text-primary); }
+.dash-stat-count.c-backlog { color: var(--seg-backlog); }
+.dash-stat-count.c-inprog  { color: var(--seg-inprogress); }
+.dash-stat-count.c-done    { color: var(--seg-completed); }
+
+/* Segmented bar */
+.dash-bar {
+  width: 100%; height: 6px; display: flex; gap: 3px;
+  border-radius: var(--radius-pill);
+}
+.dash-seg {
   height: 100%; border-radius: var(--radius-pill);
-  transition: width .4s cubic-bezier(.4,0,.2,1);
+  transition: flex .45s cubic-bezier(.4,0,.2,1);
+  min-width: 0; flex: 0 0 0%;
 }
-.metric-bar-fill.c-accent  { background: var(--accent); }
-.metric-bar-fill.c-orange  { background: var(--orange-bar); }
-.metric-bar-fill.c-green   { background: var(--success-text); }
-.metric-bar-fill.c-default { background: var(--text-tertiary); }
+.dash-seg.s-empty    { background: var(--bg-tertiary); flex: 1; }
+.dash-seg.s-backlog  { background: var(--seg-backlog); }
+.dash-seg.s-inprog   { background: var(--seg-inprogress); }
+.dash-seg.s-done     { background: var(--seg-completed); }
 
 /* ── TOOLBAR ─────────────────────────────────────────────────────── */
 #toolbar {
@@ -235,21 +249,13 @@ input, select, textarea { font-family: var(--font); }
 .view-btn {
   width: 30px; height: 28px; display: flex; align-items: center; justify-content: center;
   border: none; background: transparent; color: var(--text-secondary);
-  border-radius: var(--radius-sm); transition: background .15s, color .15s; font-size: 16px;
+  border-radius: var(--radius-sm); transition: background .15s, color .15s;
 }
 .view-btn:hover { color: var(--text-primary); }
 .view-btn.active { background: var(--surface); color: var(--accent); box-shadow: var(--shadow-sm); }
+.view-btn .icon { font-size: 16px; }
 
-/* New Task button + shortcut hint */
-.new-task-wrap { display: flex; align-items: center; gap: 6px; }
-.kbd-hint {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 20px; height: 20px; border-radius: var(--radius-sm);
-  border: 1px solid var(--surface-border);
-  background: var(--bg-secondary); color: var(--text-tertiary);
-  font-size: 11px; font-weight: 600; font-family: var(--font);
-  line-height: 1; flex-shrink: 0;
-}
+/* Primary button */
 .btn-primary {
   height: 34px; padding: 0 16px;
   background: var(--accent); color: #fff;
@@ -274,8 +280,8 @@ table.tasks-table { width: 100%; border-collapse: collapse; min-width: 780px; }
 table.tasks-table thead { position: sticky; top: 0; z-index: 50; background: var(--bg-secondary); }
 table.tasks-table th {
   padding: 0 16px; height: 38px;
-  text-align: left; font-size: 11px; font-weight: 600;
-  color: var(--text-tertiary); letter-spacing: .5px; text-transform: uppercase;
+  text-align: left; font-size: 12px; font-weight: 600;
+  color: var(--text-tertiary);
   border-bottom: 1px solid var(--surface-border); white-space: nowrap; background: var(--bg-secondary);
 }
 table.tasks-table th.sortable { cursor: pointer; user-select: none; }
@@ -305,12 +311,12 @@ table.tasks-table td { padding: 0 16px; height: 52px; font-size: 13px; color: va
   padding: 3px 9px; border-radius: var(--radius-pill);
   font-size: 11px; font-weight: 600; white-space: nowrap; letter-spacing: .2px;
 }
-.badge-backlog    { background: var(--bg-tertiary);  color: var(--text-secondary); }
-.badge-inprogress { background: var(--info-bg);       color: var(--info-text); }
-.badge-completed  { background: var(--success-bg);    color: var(--success-text); }
-.badge-low        { background: var(--bg-tertiary);   color: var(--text-secondary); }
-.badge-medium     { background: var(--warning-bg);    color: var(--warning-text); }
-.badge-high       { background: var(--error-bg);      color: var(--error-text); }
+.badge-backlog    { background: var(--bg-tertiary); color: var(--text-secondary); }
+.badge-inprogress { background: var(--info-bg);     color: var(--info-text); }
+.badge-completed  { background: var(--success-bg);  color: var(--success-text); }
+.badge-low        { background: var(--bg-tertiary); color: var(--text-secondary); }
+.badge-medium     { background: var(--warning-bg);  color: var(--warning-text); }
+.badge-high       { background: var(--error-bg);    color: var(--error-text); }
 
 /* Due date urgency */
 .due-urgent  { color: var(--error-text)   !important; font-weight: 600; }
@@ -321,12 +327,10 @@ table.tasks-table td { padding: 0 16px; height: 52px; font-size: 13px; color: va
 .comment-ct .icon { font-size: 14px; }
 
 /* ── EMPTY STATE ─────────────────────────────────────────────────── */
-#empty-state { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 12px; padding: 40px; }
+#empty-state { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 8px; padding: 40px; text-align: center; }
 #empty-state.visible { display: flex; }
-.empty-icon-wrap { width: 64px; height: 64px; border-radius: var(--radius-xl); background: var(--accent-light); display: flex; align-items: center; justify-content: center; }
-.empty-icon-wrap .icon { font-size: 28px; color: var(--accent); }
-.empty-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
-.empty-body  { font-size: 13px; color: var(--text-secondary); text-align: center; }
+.empty-title { font-size: 20px; font-weight: 600; color: var(--text-primary); letter-spacing: -.2px; }
+.empty-body  { font-size: 13px; color: var(--text-secondary); max-width: 320px; line-height: 1.6; }
 
 /* ── KANBAN ──────────────────────────────────────────────────────── */
 #kanban-board { display: flex; height: 100%; }
@@ -337,7 +341,7 @@ table.tasks-table td { padding: 0 16px; height: 52px; font-size: 13px; color: va
   border-bottom: 1px solid var(--surface-border);
   display: flex; align-items: center; gap: 8px; flex-shrink: 0;
 }
-.kanban-col-title { font-size: 12px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: .5px; }
+.kanban-col-title { font-size: 12px; font-weight: 600; color: var(--text-secondary); }
 .k-count { height: 18px; min-width: 18px; padding: 0 5px; border-radius: var(--radius-pill); background: var(--bg-tertiary); font-size: 11px; font-weight: 600; color: var(--text-tertiary); display: flex; align-items: center; justify-content: center; }
 .kanban-cards { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
 .kanban-card { background: var(--surface); border: 1px solid var(--surface-border); border-radius: var(--radius-lg); padding: 14px; cursor: pointer; transition: box-shadow .15s, border-color .15s; }
@@ -348,40 +352,44 @@ table.tasks-table td { padding: 0 16px; height: 52px; font-size: 13px; color: va
 
 /* ── SIDE PANEL ──────────────────────────────────────────────────── */
 #side-panel {
-  position: fixed; top: var(--header-h); right: 0; bottom: 0;
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
   width: 36%; min-width: 380px; max-width: 560px;
   background: var(--surface); border-left: 1px solid var(--surface-border);
   display: flex; flex-direction: column;
   transform: translateX(100%);
   transition: transform .22s cubic-bezier(.4,0,.2,1);
-  z-index: 600; box-shadow: var(--shadow-lg);
+  z-index: 950;
+  box-shadow: var(--shadow-lg);
 }
 #side-panel.open { transform: translateX(0); }
 
-/* Backdrop for closing panel by clicking outside */
+/* Transparent backdrop — click outside to close */
 #panel-backdrop {
-  display: none; position: fixed; inset: 0; z-index: 590;
+  display: none; position: fixed; inset: 0; z-index: 940;
   background: transparent;
 }
 #panel-backdrop.visible { display: block; }
 
 .panel-header {
-  padding: 16px 16px 14px; border-bottom: 1px solid var(--surface-border);
+  padding: 16px 16px 14px;
+  padding-top: calc(var(--header-h) - 8px);
+  border-bottom: 1px solid var(--surface-border);
   display: flex; align-items: flex-start; gap: 8px; flex-shrink: 0;
+  background: var(--surface);
 }
-.panel-title { flex: 1; font-size: 16px; font-weight: 600; color: var(--text-primary); line-height: 1.4; word-break: break-word; }
-.panel-body { flex: 1; overflow-y: auto; }
+.panel-title { flex: 1; font-size: 15px; font-weight: 600; color: var(--text-primary); line-height: 1.4; word-break: break-word; padding-top: 2px; }
+.panel-body  { flex: 1; overflow-y: auto; }
 .panel-section { padding: 16px; }
 .panel-section + .panel-section { border-top: 1px solid var(--surface-border); }
 .panel-meta-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
-.panel-meta-lbl { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; color: var(--text-tertiary); margin-bottom: 6px; }
+.panel-meta-lbl { font-size: 11px; font-weight: 600; color: var(--text-tertiary); margin-bottom: 6px; letter-spacing: .1px; }
 .panel-desc { font-size: 13px; color: var(--text-primary); line-height: 1.7; white-space: pre-wrap; }
 
 /* Comments */
 .comments-list { display: flex; flex-direction: column; gap: 14px; }
-.no-comments-state { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 20px 0; }
-.no-comments-state .icon { font-size: 28px; color: var(--text-tertiary); }
-.no-comments-state p { font-size: 13px; color: var(--text-tertiary); text-align: center; }
+.no-comments-state { padding: 8px 0 16px; }
+.no-comments-state p { font-size: 13px; color: var(--text-tertiary); line-height: 1.6; }
 .comment-item {}
 .comment-head { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
 .comment-avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--accent-light); color: var(--accent-text); font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; text-transform: uppercase; }
@@ -417,30 +425,23 @@ table.tasks-table td { padding: 0 16px; height: 52px; font-size: 13px; color: va
 /* ── DELETE CONFIRM MODAL ────────────────────────────────────────── */
 #delete-modal {
   display: none; position: fixed; inset: 0; z-index: 1100;
-  background: rgba(0,0,0,.35); backdrop-filter: blur(2px);
+  background: rgba(0,0,0,.4); backdrop-filter: blur(3px);
   align-items: center; justify-content: center;
 }
 #delete-modal.open { display: flex; }
 .delete-modal-box {
-  width: 400px; max-width: 90vw;
+  width: 420px; max-width: 90vw;
   background: var(--surface); border-radius: var(--radius-xl);
   box-shadow: var(--shadow-lg); border: 1px solid var(--surface-border);
-  padding: 28px 28px 24px; display: flex; flex-direction: column; gap: 16px;
+  padding: 32px 28px 24px; display: flex; flex-direction: column; gap: 20px;
 }
-.delete-modal-icon {
-  width: 44px; height: 44px; border-radius: var(--radius-lg);
-  background: var(--error-bg); display: flex; align-items: center; justify-content: center;
-}
-.delete-modal-icon .icon { font-size: 22px; color: var(--error-text); }
-.delete-modal-title { font-size: 16px; font-weight: 600; color: var(--text-primary); }
-.delete-modal-body  { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+.delete-modal-title { font-size: 17px; font-weight: 700; color: var(--text-primary); letter-spacing: -.2px; }
+.delete-modal-body  { font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin-top: 6px; }
 .delete-modal-task  { font-weight: 600; color: var(--text-primary); }
-.delete-modal-footer { display: flex; justify-content: flex-end; gap: 8px; padding-top: 4px; }
+.delete-modal-footer { display: flex; justify-content: flex-end; gap: 8px; }
 .btn-cancel-del {
-  height: 36px; padding: 0 16px;
-  background: transparent; border: 1px solid var(--surface-border);
-  color: var(--text-secondary); border-radius: var(--radius-md);
-  font-size: 13px; font-weight: 500; transition: background .15s;
+  height: 36px; padding: 0 16px; background: transparent; border: 1px solid var(--surface-border);
+  color: var(--text-secondary); border-radius: var(--radius-md); font-size: 13px; font-weight: 500; transition: background .15s;
 }
 .btn-cancel-del:hover { background: var(--bg-hover); }
 .btn-danger {
@@ -449,7 +450,7 @@ table.tasks-table td { padding: 0 16px; height: 52px; font-size: 13px; color: va
 }
 .btn-danger:hover { opacity: .85; }
 
-/* ── TASK MODAL ──────────────────────────────────────────────────── */
+/* ── TASK / SETTINGS MODAL ───────────────────────────────────────── */
 .modal-overlay {
   position: fixed; inset: 0; z-index: 1000;
   background: rgba(0,0,0,.35); backdrop-filter: blur(2px);
@@ -471,15 +472,12 @@ table.tasks-table td { padding: 0 16px; height: 52px; font-size: 13px; color: va
 .modal-body   { padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; flex: 1; }
 .modal-footer { padding: 14px 20px; border-top: 1px solid var(--surface-border); display: flex; justify-content: flex-end; gap: 8px; flex-shrink: 0; }
 .btn-cancel {
-  height: 36px; padding: 0 16px;
-  background: transparent; border: 1px solid var(--surface-border);
-  color: var(--text-secondary); border-radius: var(--radius-md);
-  font-size: 13px; font-weight: 500; transition: background .15s;
+  height: 36px; padding: 0 16px; background: transparent; border: 1px solid var(--surface-border);
+  color: var(--text-secondary); border-radius: var(--radius-md); font-size: 13px; font-weight: 500; transition: background .15s;
 }
 .btn-cancel:hover { background: var(--bg-hover); }
 .btn-save {
-  height: 36px; padding: 0 20px;
-  background: var(--accent); color: #fff; border: none;
+  height: 36px; padding: 0 20px; background: var(--accent); color: #fff; border: none;
   border-radius: var(--radius-md); font-size: 13px; font-weight: 600;
   transition: background .15s, box-shadow .15s;
 }
@@ -508,9 +506,9 @@ table.tasks-table td { padding: 0 16px; height: 52px; font-size: 13px; color: va
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%239b9baf'%3E%3Cpath d='M8 10.5L3.5 6h9z'/%3E%3C/svg%3E");
   background-repeat: no-repeat; background-position: right 10px center; background-size: 14px;
 }
-.field .helper { font-size: 11px; color: var(--text-tertiary); }
-.field-error { color: var(--error-text); font-size: 12px; display: none; margin-top: 2px; }
-.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field .helper  { font-size: 11px; color: var(--text-tertiary); }
+.field-error    { color: var(--error-text); font-size: 12px; display: none; margin-top: 2px; }
+.field-row      { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
 /* ── TOAST ───────────────────────────────────────────────────────── */
 #toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 2000; display: flex; flex-direction: column; gap: 8px; }
@@ -559,7 +557,7 @@ table.tasks-table td { padding: 0 16px; height: 52px; font-size: 13px; color: va
   <div class="loading-text">Loading your workspace…</div>
 </div>
 
-<!-- Panel backdrop (click-outside to close) -->
+<!-- Panel backdrop -->
 <div id="panel-backdrop"></div>
 
 <!-- ── HEADER ─────────────────────────────────────────────── -->
@@ -587,37 +585,30 @@ table.tasks-table td { padding: 0 16px; height: 52px; font-size: 13px; color: va
 
 <!-- ── DASHBOARD ──────────────────────────────────────────── -->
 <div id="dashboard">
-  <div class="metric-card">
-    <div class="metric-top">
-      <div class="metric-label">All Tasks</div>
-      <div class="metric-pct" id="pct-all">—</div>
+  <!-- Stats row -->
+  <div class="dash-stats">
+    <div class="dash-stat" id="stat-all">
+      <div class="dash-stat-label">All Tasks</div>
+      <div class="dash-stat-count c-all" id="metric-all">0</div>
     </div>
-    <div class="metric-value c-accent" id="metric-all">0</div>
-    <div class="metric-bar-track"><div class="metric-bar-fill c-accent" id="bar-all" style="width:0%"></div></div>
+    <div class="dash-stat" id="stat-backlog">
+      <div class="dash-stat-label">Backlog</div>
+      <div class="dash-stat-count c-backlog" id="metric-backlog">0</div>
+    </div>
+    <div class="dash-stat" id="stat-inprogress">
+      <div class="dash-stat-label">In Progress</div>
+      <div class="dash-stat-count c-inprog" id="metric-inprogress">0</div>
+    </div>
+    <div class="dash-stat" id="stat-completed">
+      <div class="dash-stat-label">Completed</div>
+      <div class="dash-stat-count c-done" id="metric-completed">0</div>
+    </div>
+    <!-- remaining space filler -->
+    <div style="flex:1"></div>
   </div>
-  <div class="metric-card">
-    <div class="metric-top">
-      <div class="metric-label">Backlog</div>
-      <div class="metric-pct" id="pct-backlog">—</div>
-    </div>
-    <div class="metric-value c-default" id="metric-backlog">0</div>
-    <div class="metric-bar-track"><div class="metric-bar-fill c-default" id="bar-backlog" style="width:0%"></div></div>
-  </div>
-  <div class="metric-card">
-    <div class="metric-top">
-      <div class="metric-label">In Progress</div>
-      <div class="metric-pct" id="pct-inprogress">—</div>
-    </div>
-    <div class="metric-value c-orange" id="metric-inprogress">0</div>
-    <div class="metric-bar-track"><div class="metric-bar-fill c-orange" id="bar-inprogress" style="width:0%"></div></div>
-  </div>
-  <div class="metric-card">
-    <div class="metric-top">
-      <div class="metric-label">Completed</div>
-      <div class="metric-pct" id="pct-completed">—</div>
-    </div>
-    <div class="metric-value c-green" id="metric-completed">0</div>
-    <div class="metric-bar-track"><div class="metric-bar-fill c-green" id="bar-completed" style="width:0%"></div></div>
+  <!-- Segmented bar -->
+  <div class="dash-bar" id="dash-bar">
+    <div class="dash-seg s-empty" id="seg-empty" style="width:100%"></div>
   </div>
 </div>
 
@@ -631,13 +622,13 @@ table.tasks-table td { padding: 0 16px; height: 52px; font-size: 13px; color: va
         <span class="icon icon-sm">close</span>
       </button>
     </div>
-    <select class="tb-select" id="filter-priority" aria-label="Filter by Priority">
+    <select class="tb-select" id="filter-priority">
       <option value="">All Priorities</option>
       <option value="High">High</option>
       <option value="Medium">Medium</option>
       <option value="Low">Low</option>
     </select>
-    <select class="tb-select" id="filter-status" aria-label="Filter by Status">
+    <select class="tb-select" id="filter-status">
       <option value="">All Statuses</option>
       <option value="Backlog">Backlog</option>
       <option value="In Progress">In Progress</option>
@@ -654,12 +645,9 @@ table.tasks-table td { padding: 0 16px; height: 52px; font-size: 13px; color: va
       </button>
     </div>
     <div class="tb-divider"></div>
-    <div class="new-task-wrap">
-      <button class="btn-primary" id="btn-new-task">
-        <span class="icon">add</span> New Task
-      </button>
-      <span class="kbd-hint" title="Keyboard shortcut: N">N</span>
-    </div>
+    <button class="btn-primary" id="btn-new-task">
+      <span class="icon">add</span> New Task
+    </button>
   </div>
 </div>
 
@@ -669,7 +657,7 @@ table.tasks-table td { padding: 0 16px; height: 52px; font-size: 13px; color: va
 
     <!-- TABLE VIEW -->
     <div id="view-table">
-      <table class="tasks-table" id="tasks-table">
+      <table class="tasks-table">
         <thead>
           <tr>
             <th class="sortable" data-col="title">Title <span class="sort-icon">↕</span></th>
@@ -684,10 +672,9 @@ table.tasks-table td { padding: 0 16px; height: 52px; font-size: 13px; color: va
         <tbody id="table-body"></tbody>
       </table>
       <div id="empty-state">
-        <div class="empty-icon-wrap"><span class="icon icon-lg">check_box_outline_blank</span></div>
-        <div class="empty-title">No Tasks Yet</div>
-        <div class="empty-body">Your task list is empty. Create your first task to get started.</div>
-        <button class="btn-primary" style="margin-top:8px" onclick="openNewTaskModal()">
+        <div class="empty-title">No tasks yet</div>
+        <div class="empty-body">Your workspace is ready. Create your first task to begin tracking your work.</div>
+        <button class="btn-primary" style="margin-top:12px" onclick="openNewTaskModal()">
           <span class="icon">add</span> New Task
         </button>
       </div>
@@ -737,7 +724,7 @@ table.tasks-table td { padding: 0 16px; height: 52px; font-size: 13px; color: va
       <span class="icon">close</span>
     </button>
   </div>
-  <div class="panel-body" id="panel-body">
+  <div class="panel-body">
     <div class="panel-section">
       <div class="panel-meta-row">
         <div>
@@ -758,7 +745,7 @@ table.tasks-table td { padding: 0 16px; height: 52px; font-size: 13px; color: va
       <div class="panel-meta-lbl" style="margin-bottom:8px">Description</div>
       <div class="panel-desc" id="panel-description"></div>
     </div>
-    <div class="panel-section" style="flex:1">
+    <div class="panel-section">
       <div class="panel-meta-lbl" style="margin-bottom:12px">Comments</div>
       <div class="comments-list" id="panel-comments"></div>
     </div>
@@ -772,19 +759,18 @@ table.tasks-table td { padding: 0 16px; height: 52px; font-size: 13px; color: va
 </aside>
 
 <!-- ── DELETE CONFIRM MODAL ───────────────────────────────── -->
-<div id="delete-modal" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
+<div id="delete-modal" role="dialog" aria-modal="true">
   <div class="delete-modal-box">
-    <div class="delete-modal-icon"><span class="icon">delete_forever</span></div>
     <div>
-      <div class="delete-modal-title" id="delete-modal-title">Delete Task</div>
-      <div class="delete-modal-body" style="margin-top:6px">
-        You are about to permanently delete the task <span class="delete-modal-task" id="delete-modal-task-name"></span>.
-        This action cannot be undone and all associated comments will be lost.
+      <div class="delete-modal-title">Delete Task</div>
+      <div class="delete-modal-body" style="margin-top:8px">
+        You are about to permanently delete <span class="delete-modal-task" id="delete-modal-task-name"></span>.
+        This action cannot be undone and all comments associated with this task will be lost.
       </div>
     </div>
     <div class="delete-modal-footer">
       <button class="btn-cancel-del" id="cancel-delete-btn">Cancel</button>
-      <button class="btn-danger" id="confirm-delete-btn">Delete Task</button>
+      <button class="btn-danger"     id="confirm-delete-btn">Delete Task</button>
     </div>
   </div>
 </div>
@@ -794,7 +780,7 @@ table.tasks-table td { padding: 0 16px; height: 52px; font-size: 13px; color: va
   <div class="modal" role="dialog" aria-modal="true">
     <div class="modal-header">
       <div class="modal-title" id="task-modal-title">New Task</div>
-      <button class="icon-btn" id="task-modal-close" aria-label="Close"><span class="icon">close</span></button>
+      <button class="icon-btn" id="task-modal-close"><span class="icon">close</span></button>
     </div>
     <div class="modal-body">
       <div class="field">
@@ -831,7 +817,7 @@ table.tasks-table td { padding: 0 16px; height: 52px; font-size: 13px; color: va
     </div>
     <div class="modal-footer">
       <button class="btn-cancel" id="task-modal-cancel">Cancel</button>
-      <button class="btn-save" id="task-modal-save">Create Task</button>
+      <button class="btn-save"   id="task-modal-save">Create Task</button>
     </div>
   </div>
 </div>
@@ -841,11 +827,13 @@ table.tasks-table td { padding: 0 16px; height: 52px; font-size: 13px; color: va
   <div class="modal" role="dialog" aria-modal="true">
     <div class="modal-header">
       <div class="modal-title">Settings</div>
-      <button class="icon-btn" id="settings-modal-close" aria-label="Close"><span class="icon">close</span></button>
+      <button class="icon-btn" id="settings-modal-close"><span class="icon">close</span></button>
     </div>
     <div class="modal-body">
       <p style="font-size:13px;color:var(--text-secondary);line-height:1.7">
-        Connect this application to a GitHub repository to enable automatic task persistence. Your tasks will be saved as a <code>tasks.json</code> file in the root of the specified repository. All credentials are stored exclusively in your browser's local storage and are never transmitted to any third party.
+        Connect this application to a GitHub repository to enable automatic task persistence.
+        Your tasks will be saved as a <code>tasks.json</code> file in the root of the specified repository.
+        All credentials are stored exclusively in your browser's local storage and are never transmitted to any third party.
       </p>
       <div class="field">
         <label for="s-username">GitHub Username <span class="req">*</span></label>
@@ -871,13 +859,13 @@ table.tasks-table td { padding: 0 16px; height: 52px; font-size: 13px; color: va
         </div>
       </div>
       <p style="font-size:12px;color:var(--text-tertiary);line-height:1.6">
-        Your name will be displayed as the author on any comments you post within a task.
+        Your name will appear as the author on any comments you post within a task.
       </p>
       <div class="field-error" id="settings-error"></div>
     </div>
     <div class="modal-footer">
       <button class="btn-cancel" id="settings-cancel">Cancel</button>
-      <button class="btn-save" id="settings-save">Save Settings</button>
+      <button class="btn-save"   id="settings-save">Save Settings</button>
     </div>
   </div>
 </div>
@@ -896,27 +884,28 @@ let syncTimer = null;
 const SKEY = 'di-settings', CKEY = 'di-tasks-cache', TKEY = 'di-theme';
 
 /* ── Utilities ──────────────────────────────────────────────────── */
-const uuid = () => (crypto.randomUUID ? crypto.randomUUID() :
-  ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
-    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)));
+const uuid = () => crypto.randomUUID
+  ? crypto.randomUUID()
+  : ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+      (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c/4).toString(16));
 
 function esc(s) {
-  return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 function relTime(iso) {
   if (!iso) return '';
   const s = (Date.now() - new Date(iso)) / 1000;
   if (s < 60)     return 'Just now';
-  if (s < 3600)   return Math.floor(s / 60) + 'm ago';
-  if (s < 86400)  return Math.floor(s / 3600) + 'h ago';
-  if (s < 604800) return Math.floor(s / 86400) + 'd ago';
+  if (s < 3600)   return Math.floor(s/60) + 'm ago';
+  if (s < 86400)  return Math.floor(s/3600) + 'h ago';
+  if (s < 604800) return Math.floor(s/86400) + 'd ago';
   return new Date(iso).toLocaleDateString();
 }
 
 function fmtDate(d) {
   if (!d) return 'No due date';
-  return new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  return new Date(d+'T12:00:00').toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
 }
 
 function urgencyClass(d) {
@@ -927,24 +916,24 @@ function urgencyClass(d) {
   return '';
 }
 
-function priorityOrder(p) { return { High: 0, Medium: 1, Low: 2 }[p] ?? 9; }
+function priorityOrder(p) { return {High:0, Medium:1, Low:2}[p] ?? 9; }
 
 function statusBadge(s) {
-  const m = { Backlog: 'badge-backlog', 'In Progress': 'badge-inprogress', Completed: 'badge-completed' };
-  return `<span class="badge ${m[s] || ''}">${esc(s)}</span>`;
+  const m = {Backlog:'badge-backlog','In Progress':'badge-inprogress',Completed:'badge-completed'};
+  return `<span class="badge ${m[s]||''}">${esc(s)}</span>`;
 }
 function priorityBadge(p) {
-  const m = { Low: 'badge-low', Medium: 'badge-medium', High: 'badge-high' };
-  return `<span class="badge ${m[p] || ''}">${esc(p)}</span>`;
+  const m = {Low:'badge-low', Medium:'badge-medium', High:'badge-high'};
+  return `<span class="badge ${m[p]||''}">${esc(p)}</span>`;
 }
-function initials(f, l) { return ((f || '').charAt(0) + (l || '').charAt(0)).toUpperCase(); }
+function initials(f, l) { return ((f||'').charAt(0)+(l||'').charAt(0)).toUpperCase(); }
 
 /* ── Toast ──────────────────────────────────────────────────────── */
-function toast(msg, type = 'info') {
-  const icons = { success: 'check_circle', error: 'error', info: 'info' };
+function toast(msg, type='info') {
+  const icons = {success:'check_circle', error:'error', info:'info'};
   const el = document.createElement('div');
   el.className = `toast ${type}`;
-  el.innerHTML = `<span class="icon">${icons[type] || 'info'}</span><span>${esc(msg)}</span>`;
+  el.innerHTML = `<span class="icon">${icons[type]||'info'}</span><span>${esc(msg)}</span>`;
   document.getElementById('toast-container').appendChild(el);
   setTimeout(() => el.remove(), 3400);
 }
@@ -954,17 +943,17 @@ function setSyncStatus(state, ts) {
   const chip = document.getElementById('sync-chip');
   const txt  = document.getElementById('sync-text');
   chip.className = state;
-  const fullTs = ts ? new Date(ts).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : '';
   if (state === 'synced') {
-    const short = new Date(ts || Date.now()).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const short = new Date(ts||Date.now()).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+    const full  = new Date(ts||Date.now()).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit', second:'2-digit'});
     txt.textContent = 'Synced · ' + short;
-    chip.setAttribute('data-tooltip', fullTs ? 'Last saved at ' + fullTs : '');
+    chip.setAttribute('data-tooltip', 'Last saved at ' + full);
   } else if (state === 'saving') {
     txt.textContent = 'Saving…';
     chip.setAttribute('data-tooltip', 'Synchronising with GitHub…');
   } else {
     txt.textContent = 'Sync Failed';
-    chip.setAttribute('data-tooltip', 'Changes have been saved locally. Check your connection and settings.');
+    chip.setAttribute('data-tooltip', 'Changes saved locally. Check your connection and settings.');
   }
 }
 
@@ -980,7 +969,7 @@ async function loadFromGitHub() {
   if (!settings) return;
   setSyncStatus('saving');
   try {
-    const r = await fetch(apiURL(), { headers: apiHdr() });
+    const r = await fetch(apiURL(), {headers: apiHdr()});
     if (r.status === 404) {
       tasks = []; fileSHA = null;
       localStorage.setItem(CKEY, JSON.stringify(tasks));
@@ -990,11 +979,11 @@ async function loadFromGitHub() {
     if (!r.ok) throw new Error('HTTP ' + r.status);
     const d = await r.json();
     fileSHA = d.sha;
-    tasks = JSON.parse(atob(d.content.replace(/\n/g, '')));
+    tasks = JSON.parse(atob(d.content.replace(/\n/g,'')));
     localStorage.setItem(CKEY, JSON.stringify(tasks));
     setSyncStatus('synced', Date.now());
     render();
-  } catch (e) {
+  } catch(e) {
     const c = localStorage.getItem(CKEY);
     if (c) tasks = JSON.parse(c);
     setSyncStatus('failed');
@@ -1007,16 +996,16 @@ async function saveToGitHub() {
   if (!settings) { setSyncStatus('failed'); return; }
   setSyncStatus('saving');
   const content = btoa(unescape(encodeURIComponent(JSON.stringify(tasks, null, 2))));
-  const body = { message: 'Update tasks.json', content };
+  const body = {message: 'Update tasks.json', content};
   if (fileSHA) body.sha = fileSHA;
   try {
-    const r = await fetch(apiURL(), { method: 'PUT', headers: apiHdr(), body: JSON.stringify(body) });
+    const r = await fetch(apiURL(), {method:'PUT', headers:apiHdr(), body:JSON.stringify(body)});
     if (!r.ok) throw new Error('HTTP ' + r.status);
     const d = await r.json();
     fileSHA = d.content.sha;
     localStorage.setItem(CKEY, JSON.stringify(tasks));
     setSyncStatus('synced', Date.now());
-  } catch (e) {
+  } catch(e) {
     localStorage.setItem(CKEY, JSON.stringify(tasks));
     setSyncStatus('failed');
     toast('Synchronisation failed. Your changes have been saved locally.', 'error');
@@ -1037,11 +1026,11 @@ function loadSettings() {
 }
 function saveSettingsLocal() { localStorage.setItem(SKEY, JSON.stringify(settings)); }
 
-function openSettings(isFirst = false) {
+function openSettings(isFirst=false) {
   if (settings) {
-    document.getElementById('s-username').value = settings.username || '';
-    document.getElementById('s-repo').value     = settings.repo     || '';
-    document.getElementById('s-pat').value       = settings.pat     || '';
+    document.getElementById('s-username').value = settings.username  || '';
+    document.getElementById('s-repo').value     = settings.repo      || '';
+    document.getElementById('s-pat').value       = settings.pat       || '';
     document.getElementById('s-first').value     = settings.firstName || '';
     document.getElementById('s-last').value      = settings.lastName  || '';
   }
@@ -1057,6 +1046,10 @@ function closeSettings() {
 document.getElementById('btn-settings').addEventListener('click', () => openSettings());
 document.getElementById('settings-modal-close').addEventListener('click', closeSettings);
 document.getElementById('settings-cancel').addEventListener('click', closeSettings);
+document.getElementById('settings-modal').addEventListener('click', e => {
+  if (e.target === document.getElementById('settings-modal') && settings) closeSettings();
+});
+
 document.getElementById('settings-save').addEventListener('click', async () => {
   const u  = document.getElementById('s-username').value.trim();
   const r  = document.getElementById('s-repo').value.trim();
@@ -1069,11 +1062,37 @@ document.getElementById('settings-save').addEventListener('click', async () => {
     err.style.display = 'block'; return;
   }
   err.style.display = 'none';
-  settings = { username: u, repo: r, pat: p, firstName: fn, lastName: ln };
+  settings = {username:u, repo:r, pat:p, firstName:fn, lastName:ln};
   saveSettingsLocal();
   closeSettings();
   await loadFromGitHub();
 });
+
+/* ── Dashboard ──────────────────────────────────────────────────── */
+function updateDashboard() {
+  const total   = tasks.length;
+  const backlog = tasks.filter(t => t.status === 'Backlog').length;
+  const inprog  = tasks.filter(t => t.status === 'In Progress').length;
+  const done    = tasks.filter(t => t.status === 'Completed').length;
+
+  document.getElementById('metric-all').textContent        = total;
+  document.getElementById('metric-backlog').textContent    = backlog;
+  document.getElementById('metric-inprogress').textContent = inprog;
+  document.getElementById('metric-completed').textContent  = done;
+
+  // Rebuild segmented bar
+  const bar = document.getElementById('dash-bar');
+  if (total === 0) {
+    bar.innerHTML = `<div class="dash-seg s-empty" style="flex:1"></div>`;
+    return;
+  }
+  // Use flex values proportional to count so bar segments align with label columns
+  bar.innerHTML = `
+    ${backlog ? `<div class="dash-seg s-backlog" style="flex:${backlog}" title="Backlog: ${backlog}"></div>` : ''}
+    ${inprog  ? `<div class="dash-seg s-inprog"  style="flex:${inprog}"  title="In Progress: ${inprog}"></div>` : ''}
+    ${done    ? `<div class="dash-seg s-done"     style="flex:${done}"    title="Completed: ${done}"></div>` : ''}
+  `;
+}
 
 /* ── Render ─────────────────────────────────────────────────────── */
 function getFiltered() {
@@ -1082,18 +1101,18 @@ function getFiltered() {
     const q = searchQ.toLowerCase();
     list = list.filter(t =>
       t.title.toLowerCase().includes(q) ||
-      (t.description || '').toLowerCase().includes(q) ||
-      (t.comments || []).some(c => c.text.toLowerCase().includes(q)));
+      (t.description||'').toLowerCase().includes(q) ||
+      (t.comments||[]).some(c => c.text.toLowerCase().includes(q)));
   }
   if (filterP) list = list.filter(t => t.priority === filterP);
   if (filterS) list = list.filter(t => t.status   === filterS);
   list.sort((a, b) => {
     let av, bv;
-    if      (sortCol === 'priority')  { av = priorityOrder(a.priority); bv = priorityOrder(b.priority); }
-    else if (sortCol === 'dueDate')   { av = a.dueDate || '9999';       bv = b.dueDate || '9999'; }
-    else if (sortCol === 'title')     { av = (a.title || '').toLowerCase(); bv = (b.title || '').toLowerCase(); }
-    else if (sortCol === 'status')    { av = a.status || ''; bv = b.status || ''; }
-    else                              { av = a.createdAt || ''; bv = b.createdAt || ''; }
+    if      (sortCol === 'priority') { av = priorityOrder(a.priority); bv = priorityOrder(b.priority); }
+    else if (sortCol === 'dueDate')  { av = a.dueDate||'9999'; bv = b.dueDate||'9999'; }
+    else if (sortCol === 'title')    { av = (a.title||'').toLowerCase(); bv = (b.title||'').toLowerCase(); }
+    else if (sortCol === 'status')   { av = a.status||''; bv = b.status||''; }
+    else                             { av = a.createdAt||''; bv = b.createdAt||''; }
     if (av < bv) return sortDir === 'asc' ? -1 : 1;
     if (av > bv) return sortDir === 'asc' ?  1 : -1;
     return 0;
@@ -1101,32 +1120,8 @@ function getFiltered() {
   return list;
 }
 
-function updateMetrics() {
-  const total    = tasks.length;
-  const backlog  = tasks.filter(t => t.status === 'Backlog').length;
-  const inprog   = tasks.filter(t => t.status === 'In Progress').length;
-  const done     = tasks.filter(t => t.status === 'Completed').length;
-  const pct = n => total > 0 ? Math.round((n / total) * 100) + '%' : '—';
-  const w   = n => total > 0 ? Math.round((n / total) * 100) + '%' : '0%';
-
-  document.getElementById('metric-all').textContent       = total;
-  document.getElementById('metric-backlog').textContent   = backlog;
-  document.getElementById('metric-inprogress').textContent = inprog;
-  document.getElementById('metric-completed').textContent  = done;
-
-  document.getElementById('pct-all').textContent       = total > 0 ? '100%' : '—';
-  document.getElementById('pct-backlog').textContent   = pct(backlog);
-  document.getElementById('pct-inprogress').textContent = pct(inprog);
-  document.getElementById('pct-completed').textContent  = pct(done);
-
-  document.getElementById('bar-all').style.width        = total > 0 ? '100%' : '0%';
-  document.getElementById('bar-backlog').style.width    = w(backlog);
-  document.getElementById('bar-inprogress').style.width = w(inprog);
-  document.getElementById('bar-completed').style.width  = w(done);
-}
-
 function render() {
-  updateMetrics();
+  updateDashboard();
   const list = getFiltered();
   if (view === 'table') renderTable(list); else renderKanban(list);
 }
@@ -1138,18 +1133,18 @@ function renderTable(list) {
   empty.classList.remove('visible');
   tbody.innerHTML = list.map(t => {
     const dc = urgencyClass(t.dueDate);
-    const cc = (t.comments || []).length;
+    const cc = (t.comments||[]).length;
     return `<tr data-id="${t.id}" onclick="openPanel('${t.id}')">
       <td class="td-title" title="${esc(t.title)}">${esc(t.title)}</td>
-      <td class="td-desc"  title="${esc(t.description)}">${esc(t.description) || '<span style="color:var(--text-tertiary)">No description</span>'}</td>
+      <td class="td-desc"  title="${esc(t.description)}">${esc(t.description)||'<span style="color:var(--text-tertiary)">No description</span>'}</td>
       <td>${statusBadge(t.status)}</td>
       <td>${priorityBadge(t.priority)}</td>
       <td class="${dc}" style="font-size:13px;color:var(--text-secondary)">${fmtDate(t.dueDate)}</td>
       <td><span class="comment-ct"><span class="icon">chat_bubble_outline</span>${cc}</span></td>
       <td onclick="event.stopPropagation()">
         <div class="row-actions">
-          <button class="row-action-btn" title="Edit Task"   onclick="openEditModal('${t.id}')"><span class="icon">edit</span></button>
-          <button class="row-action-btn danger" title="Delete Task" onclick="promptDelete('${t.id}')"><span class="icon">delete</span></button>
+          <button class="row-action-btn"        title="Edit Task"   onclick="openEditModal('${t.id}')"><span class="icon">edit</span></button>
+          <button class="row-action-btn danger"  title="Delete Task" onclick="promptDelete('${t.id}')"><span class="icon">delete</span></button>
         </div>
       </td>
     </tr>`;
@@ -1157,22 +1152,22 @@ function renderTable(list) {
 }
 
 function renderKanban(list) {
-  const cols = { Backlog: [], 'In Progress': [], Completed: [] };
+  const cols = {Backlog:[], 'In Progress':[], Completed:[]};
   list.forEach(t => { if (cols[t.status]) cols[t.status].push(t); });
-  renderKCol('backlog',    'Backlog',      cols['Backlog']);
-  renderKCol('inprogress', 'In Progress',  cols['In Progress']);
-  renderKCol('completed',  'Completed',    cols['Completed']);
+  renderKCol('backlog',   'Backlog',     cols['Backlog']);
+  renderKCol('inprogress','In Progress', cols['In Progress']);
+  renderKCol('completed', 'Completed',   cols['Completed']);
 }
 function renderKCol(key, label, items) {
-  document.getElementById('k-count-' + key).textContent = items.length;
-  const el = document.getElementById('k-cards-' + key);
+  document.getElementById('k-count-'+key).textContent = items.length;
+  const el = document.getElementById('k-cards-'+key);
   if (!items.length) {
     el.innerHTML = `<div style="font-size:12px;color:var(--text-tertiary);text-align:center;padding:24px 0">No tasks in this column</div>`;
     return;
   }
   el.innerHTML = items.map(t => {
     const dc = urgencyClass(t.dueDate);
-    const cc = (t.comments || []).length;
+    const cc = (t.comments||[]).length;
     return `<div class="kanban-card" onclick="openPanel('${t.id}')">
       <div class="kanban-card-title">${esc(t.title)}</div>
       <div class="kanban-card-meta">
@@ -1188,9 +1183,9 @@ function renderKCol(key, label, items) {
 function openPanel(id) {
   const t = tasks.find(x => x.id === id); if (!t) return;
   activePanelId = id;
-  document.getElementById('panel-title').textContent = t.title;
-  document.getElementById('panel-status').innerHTML  = statusBadge(t.status);
-  document.getElementById('panel-priority').innerHTML = priorityBadge(t.priority);
+  document.getElementById('panel-title').textContent    = t.title;
+  document.getElementById('panel-status').innerHTML     = statusBadge(t.status);
+  document.getElementById('panel-priority').innerHTML   = priorityBadge(t.priority);
   const dc = urgencyClass(t.dueDate);
   document.getElementById('panel-due').innerHTML = `<span class="${dc}">${fmtDate(t.dueDate)}</span>`;
   document.getElementById('panel-description').textContent = t.description || 'No description has been provided for this task.';
@@ -1209,10 +1204,9 @@ function closePanel() {
 
 function renderComments(t) {
   const el = document.getElementById('panel-comments');
-  if (!(t.comments || []).length) {
+  if (!(t.comments||[]).length) {
     el.innerHTML = `<div class="no-comments-state">
-      <span class="icon">chat_bubble_outline</span>
-      <p>No comments have been added yet.<br>Be the first to leave a note on this task.</p>
+      <p>No comments have been added yet. Use the field below to leave a note on this task.</p>
     </div>`;
     return;
   }
@@ -1232,7 +1226,6 @@ document.getElementById('panel-backdrop').addEventListener('click', closePanel);
 document.getElementById('panel-edit-btn').addEventListener('click', () => { if (activePanelId) openEditModal(activePanelId); });
 document.getElementById('panel-delete-btn').addEventListener('click', () => { if (activePanelId) promptDelete(activePanelId); });
 
-/* Enable/disable Post Comment button */
 document.getElementById('comment-input').addEventListener('input', e => {
   document.getElementById('post-comment-btn').disabled = !e.target.value.trim();
 });
@@ -1243,13 +1236,7 @@ document.getElementById('post-comment-btn').addEventListener('click', () => {
   if (!settings) { toast('Please configure your settings before posting a comment.', 'error'); return; }
   const t = tasks.find(x => x.id === activePanelId); if (!t) return;
   if (!t.comments) t.comments = [];
-  t.comments.push({
-    id: uuid(),
-    authorFirstName: settings.firstName,
-    authorLastName:  settings.lastName,
-    text,
-    timestamp: new Date().toISOString()
-  });
+  t.comments.push({id:uuid(), authorFirstName:settings.firstName, authorLastName:settings.lastName, text, timestamp:new Date().toISOString()});
   document.getElementById('comment-input').value = '';
   document.getElementById('post-comment-btn').disabled = true;
   renderComments(t); render(); save();
@@ -1279,7 +1266,6 @@ document.getElementById('cancel-delete-btn').addEventListener('click', () => {
   pendingDeleteId = null;
 });
 
-/* Close delete modal on backdrop click */
 document.getElementById('delete-modal').addEventListener('click', e => {
   if (e.target === document.getElementById('delete-modal')) {
     document.getElementById('delete-modal').classList.remove('open');
@@ -1325,14 +1311,14 @@ document.getElementById('task-modal-cancel').addEventListener('click', closeTask
 document.getElementById('task-modal').addEventListener('click', e => {
   if (e.target === document.getElementById('task-modal')) closeTaskModal();
 });
-document.getElementById('settings-modal').addEventListener('click', e => {
-  if (e.target === document.getElementById('settings-modal') && settings) closeSettings();
-});
 
 document.getElementById('task-modal-save').addEventListener('click', () => {
-  const title  = document.getElementById('f-title').value.trim();
-  const errEl  = document.getElementById('task-modal-error');
-  if (!title) { errEl.textContent = 'A title is required. Please enter a name for this task.'; errEl.style.display = 'block'; return; }
+  const title = document.getElementById('f-title').value.trim();
+  const errEl = document.getElementById('task-modal-error');
+  if (!title) {
+    errEl.textContent = 'A title is required. Please enter a name for this task.';
+    errEl.style.display = 'block'; return;
+  }
   errEl.style.display = 'none';
   const data = {
     title,
@@ -1345,7 +1331,7 @@ document.getElementById('task-modal-save').addEventListener('click', () => {
     const t = tasks.find(x => x.id === editingId); if (t) Object.assign(t, data);
     if (activePanelId === editingId) openPanel(editingId);
   } else {
-    tasks.push({ id: uuid(), ...data, comments: [], createdAt: new Date().toISOString() });
+    tasks.push({id:uuid(), ...data, comments:[], createdAt:new Date().toISOString()});
   }
   closeTaskModal(); render(); save();
   toast(editingId ? 'Task updated successfully.' : 'Task created successfully.', 'success');
@@ -1403,7 +1389,7 @@ document.getElementById('btn-theme-toggle').addEventListener('click', () => appl
 
 /* ── Keyboard Shortcuts ─────────────────────────────────────────── */
 document.addEventListener('keydown', e => {
-  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+  if (e.target.tagName==='INPUT' || e.target.tagName==='TEXTAREA' || e.target.tagName==='SELECT') return;
   if (e.key === 'n' || e.key === 'N') openNewTaskModal();
   if (e.key === 'Escape') {
     if (document.getElementById('delete-modal').classList.contains('open')) {
