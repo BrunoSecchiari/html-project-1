@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "id": "3ccc08cb-1431-4412-a6e6-8056edf4e78b",
+    "title": "Title",
+    "description": "",
+    "status": "Backlog",
+    "priority": "Medium",
+    "dueDate": null,
+    "comments": [],
+    "createdAt": "2026-05-22T15:22:14.668Z"
+  }
+]
