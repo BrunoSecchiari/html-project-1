@@ -82,7 +82,7 @@
   {
     "id": "4bef4f9a-7592-4755-ba84-f15243eaa811",
     "title": "AED - Items/Reconciliations Tile",
-    "description": "",
+    "description": "Coordinate review sessions with the business owners of the Items/Reconciliations tile in IBM Cognos Analytics to validate and update dashboard visualizations. The scope includes ensuring that all required data is accurately reflected, identifying and resolving any data inconsistencies, and confirming that associated drill-through reports function correctly to enable end users to access supporting transactional detail.",
     "status": "Backlog",
     "priority": "Medium",
     "dueDate": null,
