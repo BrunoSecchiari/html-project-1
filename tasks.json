@@ -8,5 +8,15 @@
     "dueDate": null,
     "comments": [],
     "createdAt": "2026-05-22T16:57:49.876Z"
+  },
+  {
+    "id": "c1882bcf-2628-435a-b0d7-94e891c82ea9",
+    "title": "Accounting Executive's Dashboard",
+    "description": "",
+    "status": "Backlog",
+    "priority": "Medium",
+    "dueDate": null,
+    "comments": [],
+    "createdAt": "2026-05-22T16:58:01.388Z"
   }
 ]
