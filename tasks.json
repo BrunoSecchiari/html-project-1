@@ -60,16 +60,6 @@
     "createdAt": "2026-05-22T17:32:18.376Z"
   },
   {
-    "id": "4538a63e-071b-4a83-9e94-2994f73447cb",
-    "title": "Items/Reconciliations Tile",
-    "description": "",
-    "status": "Backlog",
-    "priority": "Medium",
-    "dueDate": null,
-    "comments": [],
-    "createdAt": "2026-05-22T17:32:25.396Z"
-  },
-  {
     "id": "101f10dc-cad4-4d06-9e0a-3bfca4942d76",
     "title": "AED - Business Owners",
     "description": "Define and assign business ownership for each tile within the Accounting Executive Dashboard (AED) in IBM Cognos Analytics. This initiative aims to establish clear accountability by identifying the responsible business owner for each reporting area, ensuring that the data presented is accurate, validated, and consistently maintained.\n\nThe assigned business owners will be responsible for reviewing data quality, validating metric definitions and calculations, and coordinating any required updates or corrections to support reliable executive reporting and decision-making.",
