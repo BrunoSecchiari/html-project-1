@@ -157,7 +157,7 @@ input, select, textarea { font-family: var(--font); }
   padding: 0 28px; gap: 10px;
 }
 
-/* Stats row: four labels + counts sitting above the bar */
+/* Stats row */
 .dash-stats {
   display: flex; align-items: flex-end;
   width: 100%; gap: 0;
@@ -167,7 +167,6 @@ input, select, textarea { font-family: var(--font); }
   overflow: hidden; min-width: 0; padding-right: 28px;
 }
 .dash-stat:last-child { padding-right: 0; }
-/* "All Tasks" is fixed-width; the other three flex with their segment */
 .dash-stat.s-all { flex-shrink: 0; min-width: 100px; }
 .dash-stat.s-backlog, .dash-stat.s-inprog, .dash-stat.s-done {
   transition: flex .45s cubic-bezier(.4,0,.2,1);
@@ -364,7 +363,6 @@ table.tasks-table td { padding: 0 16px; height: 52px; font-size: 13px; color: va
 }
 #side-panel.open { transform: translateX(0); }
 
-/* Transparent backdrop — click outside to close */
 #panel-backdrop {
   display: none; position: fixed; inset: 0; z-index: 940;
   background: transparent;
@@ -501,17 +499,37 @@ table.tasks-table td { padding: 0 16px; height: 52px; font-size: 13px; color: va
 .field textarea { height: 80px; padding: 9px 12px; resize: vertical; }
 .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent); }
 .field input::placeholder, .field textarea::placeholder { color: var(--text-tertiary); }
-.field input[type="date"] { color-scheme: light; }
-[data-theme="dark"] .field input[type="date"] { color-scheme: dark; filter: invert(0); }
-[data-theme="dark"] .field input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(1) opacity(.6);
-  cursor: pointer;
+
+/* ── FIX: Date input — light mode ───────────────────────────────── */
+.field input[type="date"] {
+  color-scheme: light;
 }
 .field input[type="date"]::-webkit-calendar-picker-indicator {
-  opacity: .5;
+  opacity: 0.5;
   cursor: pointer;
 }
-.field input[type="date"]::-webkit-calendar-picker-indicator:hover { opacity: 1; }
+.field input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+/* ── FIX: Date input — dark mode: force light color-scheme so the
+         native calendar icon renders in a visible light colour.
+         The invert(0) in the original code was a no-op; replaced
+         with color-scheme: light which makes Chrome/Edge render
+         the picker icon in a colour that contrasts with the dark bg,
+         then we tint it to match the accent palette. ────────────── */
+[data-theme="dark"] .field input[type="date"] {
+  color-scheme: dark;
+}
+[data-theme="dark"] .field input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.75;
+  cursor: pointer;
+}
+[data-theme="dark"] .field input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
 .field select {
   appearance: none; cursor: pointer;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%239b9baf'%3E%3Cpath d='M8 10.5L3.5 6h9z'/%3E%3C/svg%3E");
@@ -596,7 +614,6 @@ table.tasks-table td { padding: 0 16px; height: 52px; font-size: 13px; color: va
 
 <!-- ── DASHBOARD ──────────────────────────────────────────── -->
 <div id="dashboard">
-  <!-- Stats row -->
   <div class="dash-stats">
     <div class="dash-stat" id="stat-all">
       <div class="dash-stat-label">All Tasks</div>
@@ -614,10 +631,8 @@ table.tasks-table td { padding: 0 16px; height: 52px; font-size: 13px; color: va
       <div class="dash-stat-label">Completed</div>
       <div class="dash-stat-count c-done" id="metric-completed">0</div>
     </div>
-    <!-- remaining space filler -->
     <div style="flex:1"></div>
   </div>
-  <!-- Segmented bar -->
   <div class="dash-bar" id="dash-bar">
     <div class="dash-seg s-empty" id="seg-empty" style="width:100%"></div>
   </div>
@@ -628,7 +643,8 @@ table.tasks-table td { padding: 0 16px; height: 52px; font-size: 13px; color: va
   <div class="toolbar-left">
     <div class="search-box">
       <span class="icon">search</span>
-      <input type="text" id="search-input" placeholder="Search tasks…" autocomplete="off"/>
+      <!-- FIX: updated placeholder text -->
+      <input type="text" id="search-input" placeholder="Search for a task..." autocomplete="off"/>
       <button class="search-clear" id="search-clear" aria-label="Clear search">
         <span class="icon icon-sm">close</span>
       </button>
@@ -976,50 +992,115 @@ const apiHdr = () => ({
   'Content-Type': 'application/json'
 });
 
+/*
+ * FIX — Safe base64 encode/decode for Unicode content.
+ *
+ * The original code used btoa()/atob() directly on the JSON string.
+ * btoa() throws a "character out of range" error whenever the JSON
+ * contains characters outside Latin-1 (e.g. accented names, emoji,
+ * CJK characters in task titles/descriptions).
+ *
+ * Solution: encode the string to UTF-8 bytes first (via TextEncoder
+ * → Uint8Array), then convert to base64 — and reverse on decode.
+ * This matches exactly how the GitHub API encodes file content.
+ */
+function toBase64(str) {
+  const bytes = new TextEncoder().encode(str);
+  let binary = '';
+  for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+  return btoa(binary);
+}
+
+function fromBase64(b64) {
+  const binary = atob(b64.replace(/\n/g, ''));
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+  return new TextDecoder().decode(bytes);
+}
+
 async function loadFromGitHub() {
   if (!settings) return;
   setSyncStatus('saving');
   try {
-    const r = await fetch(apiURL(), {headers: apiHdr()});
+    const r = await fetch(apiURL(), { headers: apiHdr() });
     if (r.status === 404) {
+      // File doesn't exist yet — start with empty tasks
       tasks = []; fileSHA = null;
       localStorage.setItem(CKEY, JSON.stringify(tasks));
       setSyncStatus('synced', Date.now());
       render(); return;
     }
-    if (!r.ok) throw new Error('HTTP ' + r.status);
+    if (r.status === 401) throw new Error('Unauthorised — check your PAT token and its repo scope.');
+    if (r.status === 403) throw new Error('Forbidden — your PAT may have expired or lack repo scope.');
+    if (!r.ok) throw new Error('GitHub API error: HTTP ' + r.status);
     const d = await r.json();
     fileSHA = d.sha;
-    tasks = JSON.parse(atob(d.content.replace(/\n/g,'')));
+    tasks = JSON.parse(fromBase64(d.content));
     localStorage.setItem(CKEY, JSON.stringify(tasks));
     setSyncStatus('synced', Date.now());
     render();
   } catch(e) {
+    console.error('[DI Sync] Load failed:', e);
     const c = localStorage.getItem(CKEY);
-    if (c) tasks = JSON.parse(c);
+    if (c) { try { tasks = JSON.parse(c); } catch(_) {} }
     setSyncStatus('failed');
     render();
-    toast('Unable to connect to GitHub. Your local cache has been loaded.', 'error');
-  } finally { hideLoading(); }
+    toast('Unable to load from GitHub: ' + (e.message || 'Unknown error') + '. Local cache loaded.', 'error');
+  } finally {
+    hideLoading();
+  }
 }
 
 async function saveToGitHub() {
   if (!settings) { setSyncStatus('failed'); return; }
   setSyncStatus('saving');
-  const content = btoa(unescape(encodeURIComponent(JSON.stringify(tasks, null, 2))));
-  const body = {message: 'Update tasks.json', content};
+  const json    = JSON.stringify(tasks, null, 2);
+  const content = toBase64(json);
+  const body    = { message: 'Update tasks.json', content };
   if (fileSHA) body.sha = fileSHA;
+
   try {
-    const r = await fetch(apiURL(), {method:'PUT', headers:apiHdr(), body:JSON.stringify(body)});
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    const d = await r.json();
-    fileSHA = d.content.sha;
+    const r = await fetch(apiURL(), { method: 'PUT', headers: apiHdr(), body: JSON.stringify(body) });
+
+    /*
+     * FIX — Handle SHA conflict (HTTP 409 / 422).
+     *
+     * If another browser tab or device saved while this tab was open,
+     * our cached fileSHA becomes stale and GitHub rejects the PUT with
+     * a 409 Conflict. We re-fetch the latest SHA and retry once.
+     */
+    if (r.status === 409 || r.status === 422) {
+      console.warn('[DI Sync] SHA conflict — re-fetching latest SHA and retrying…');
+      const refetch = await fetch(apiURL(), { headers: apiHdr() });
+      if (refetch.ok) {
+        const latest = await refetch.json();
+        fileSHA = latest.sha;
+        body.sha = fileSHA;
+        const retry = await fetch(apiURL(), { method: 'PUT', headers: apiHdr(), body: JSON.stringify(body) });
+        if (!retry.ok) throw new Error('Retry failed: HTTP ' + retry.status);
+        const retryData = await retry.json();
+        fileSHA = retryData.content.sha;
+      } else {
+        throw new Error('Could not re-fetch SHA: HTTP ' + refetch.status);
+      }
+    } else if (r.status === 401) {
+      throw new Error('Unauthorised — check your PAT token.');
+    } else if (r.status === 403) {
+      throw new Error('Forbidden — your PAT may lack the repo write scope.');
+    } else if (!r.ok) {
+      throw new Error('GitHub API error: HTTP ' + r.status);
+    } else {
+      const d = await r.json();
+      fileSHA = d.content.sha;
+    }
+
     localStorage.setItem(CKEY, JSON.stringify(tasks));
     setSyncStatus('synced', Date.now());
   } catch(e) {
+    console.error('[DI Sync] Save failed:', e);
     localStorage.setItem(CKEY, JSON.stringify(tasks));
     setSyncStatus('failed');
-    toast('Synchronisation failed. Your changes have been saved locally.', 'error');
+    toast('Sync failed: ' + (e.message || 'Unknown error') + '. Changes saved locally.', 'error');
   }
 }
 
@@ -1091,13 +1172,11 @@ function updateDashboard() {
   document.getElementById('metric-inprogress').textContent = inprog;
   document.getElementById('metric-completed').textContent  = done;
 
-  // Rebuild segmented bar
   const bar = document.getElementById('dash-bar');
   if (total === 0) {
     bar.innerHTML = `<div class="dash-seg s-empty" style="flex:1"></div>`;
     return;
   }
-  // Use flex values proportional to count so bar segments align with label columns
   bar.innerHTML = `
     ${backlog ? `<div class="dash-seg s-backlog" style="flex:${backlog}" title="Backlog: ${backlog}"></div>` : ''}
     ${inprog  ? `<div class="dash-seg s-inprog"  style="flex:${inprog}"  title="In Progress: ${inprog}"></div>` : ''}
@@ -1423,7 +1502,7 @@ async function init() {
   const has = loadSettings();
   if (!has) { hideLoading(); openSettings(true); return; }
   const c = localStorage.getItem(CKEY);
-  if (c) { tasks = JSON.parse(c); render(); }
+  if (c) { try { tasks = JSON.parse(c); } catch(_) {} render(); }
   await loadFromGitHub();
 }
 init();
