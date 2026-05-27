@@ -2,7 +2,7 @@
   {
     "id": "617105e4-ef47-4014-bd9b-4994863a737e",
     "title": "Director's Scorecard - MVP1",
-    "description": "Design and develop the Director’s Scorecard report in IBM Cognos Analytics to provide a standardized and objective framework for measuring the performance of directors and managers across towers and departments.\n\nThe scorecard will consolidate and evaluate key operational and financial performance indicators, including metrics such as:\n- % Automated Journal Lines\n- # Tasks/Hours\n- % Budget Attainment\n- % FTE Reduction\n\nThe initiative aims to establish a consistent performance measurement methodology by applying uniform calculations, scoring criteria, and point allocations across all business areas. This will enable transparent performance tracking, support leadership evaluations, and drive accountability and continuous improvement throughout the organization.",
+    "description": "Design and develop the DirectorÃ¢ÂÂs Scorecard report in IBM Cognos Analytics to provide a standardized and objective framework for measuring the performance of directors and managers across towers and departments.\n\nThe scorecard will consolidate and evaluate key operational and financial performance indicators, including metrics such as:\n- % Automated Journal Lines\n- # Tasks/Hours\n- % Budget Attainment\n- % FTE Reduction\n\nThe initiative aims to establish a consistent performance measurement methodology by applying uniform calculations, scoring criteria, and point allocations across all business areas. This will enable transparent performance tracking, support leadership evaluations, and drive accountability and continuous improvement throughout the organization.",
     "status": "Completed",
     "priority": "High",
     "dueDate": "2026-05-01",
@@ -42,7 +42,7 @@
   {
     "id": "39a0683f-f285-48c8-a781-77f96630e361",
     "title": "Jobotx",
-    "description": "Ensure that Jobotx-generated automated journal entries are correctly identified, flagged, and consistently treated as automated journals in IBM Cognos Analytics reporting from 2Q’26 onward. This includes aligning their classification with existing automation logic to ensure accurate reporting and exclusion/inclusion in relevant financial metrics and dashboards.",
+    "description": "Ensure that Jobotx-generated automated journal entries are correctly identified, flagged, and consistently treated as automated journals in IBM Cognos Analytics reporting from 2QÃ¢ÂÂ26 onward. This includes aligning their classification with existing automation logic to ensure accurate reporting and exclusion/inclusion in relevant financial metrics and dashboards.",
     "status": "Backlog",
     "priority": "Medium",
     "dueDate": "2026-06-30",
@@ -88,5 +88,35 @@
     "dueDate": null,
     "comments": [],
     "createdAt": "2026-05-22T17:50:26.732Z"
+  },
+  {
+    "id": "ebfe0933-2b8b-4382-92bd-8d7b1e59efc6",
+    "title": "ODA073",
+    "description": "",
+    "status": "Backlog",
+    "priority": "Low",
+    "dueDate": "2026-06-30",
+    "comments": [],
+    "createdAt": "2026-05-26T13:54:09.047Z"
+  },
+  {
+    "id": "fe9d6fd3-233d-4230-91e5-5e007ccc4afe",
+    "title": "ODA243",
+    "description": "",
+    "status": "Backlog",
+    "priority": "Low",
+    "dueDate": "2026-06-30",
+    "comments": [],
+    "createdAt": "2026-05-26T13:55:09.165Z"
+  },
+  {
+    "id": "3555f454-b2b3-480d-956e-a24712c11144",
+    "title": "ODA267",
+    "description": "",
+    "status": "Backlog",
+    "priority": "Low",
+    "dueDate": "2026-06-30",
+    "comments": [],
+    "createdAt": "2026-05-26T13:55:24.777Z"
   }
 ]
