@@ -118,15 +118,5 @@
     "dueDate": "2026-06-30",
     "comments": [],
     "createdAt": "2026-05-26T13:55:24.777Z"
-  },
-  {
-    "id": "e1302fa9-9630-4fd6-8061-4ea15bd66c30",
-    "title": "Performance Distribution Report",
-    "description": "",
-    "status": "Backlog",
-    "priority": "High",
-    "dueDate": "2026-06-30",
-    "comments": [],
-    "createdAt": "2026-05-27T14:43:30.495Z"
   }
 ]
