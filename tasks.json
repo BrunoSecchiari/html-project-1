@@ -118,15 +118,5 @@
     "dueDate": "2026-06-30",
     "comments": [],
     "createdAt": "2026-05-26T13:55:24.777Z"
-  },
-  {
-    "id": "80a992be-2ada-4d79-bcc9-73b6d345ffb2",
-    "title": "Task1",
-    "description": "",
-    "status": "Backlog",
-    "priority": "Medium",
-    "dueDate": null,
-    "comments": [],
-    "createdAt": "2026-05-27T12:53:23.864Z"
   }
 ]
