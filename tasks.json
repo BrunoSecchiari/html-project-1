@@ -128,15 +128,5 @@
     "dueDate": "2026-06-30",
     "comments": [],
     "createdAt": "2026-05-27T14:43:30.495Z"
-  },
-  {
-    "id": "a1cf4917-5766-4742-83b0-efb7e5d6381f",
-    "title": "task",
-    "description": "",
-    "status": "Completed",
-    "priority": "Medium",
-    "dueDate": null,
-    "comments": [],
-    "createdAt": "2026-05-27T14:43:50.613Z"
   }
 ]
