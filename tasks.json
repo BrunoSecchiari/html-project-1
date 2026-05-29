@@ -2,7 +2,7 @@
   {
     "id": "617105e4-ef47-4014-bd9b-4994863a737e",
     "title": "Director's Scorecard - MVP1",
-    "description": "Design and develop the DirectorÃ¢ÂÂs Scorecard report in IBM Cognos Analytics to provide a standardized and objective framework for measuring the performance of directors and managers across towers and departments.\n\nThe scorecard will consolidate and evaluate key operational and financial performance indicators, including metrics such as:\n- % Automated Journal Lines\n- # Tasks/Hours\n- % Budget Attainment\n- % FTE Reduction\n\nThe initiative aims to establish a consistent performance measurement methodology by applying uniform calculations, scoring criteria, and point allocations across all business areas. This will enable transparent performance tracking, support leadership evaluations, and drive accountability and continuous improvement throughout the organization.",
+    "description": "Design and develop the Director's Scorecard report in IBM Cognos Analytics to provide a standardized and objective framework for measuring the performance of directors and managers across towers and departments.\n\nThe scorecard will consolidate and evaluate key operational and financial performance indicators, including metrics such as:\n- % Automated Journal Lines\n- # Tasks/Hours\n- % Budget Attainment\n- % FTE Reduction\n\nThe initiative aims to establish a consistent performance measurement methodology by applying uniform calculations, scoring criteria, and point allocations across all business areas. This will enable transparent performance tracking, support leadership evaluations, and drive accountability and continuous improvement throughout the organization.",
     "status": "Completed",
     "priority": "High",
     "dueDate": "2026-05-01",
@@ -118,5 +118,35 @@
     "dueDate": "2026-06-30",
     "comments": [],
     "createdAt": "2026-05-26T13:55:24.777Z"
+  },
+  {
+    "id": "0c1c915e-fac4-4fca-b063-9368b110f019",
+    "title": "ODA279",
+    "description": "",
+    "status": "In Progress",
+    "priority": "Low",
+    "dueDate": "2026-06-30",
+    "comments": [],
+    "createdAt": "2026-05-28T12:27:18.682Z"
+  },
+  {
+    "id": "832269a1-02d3-4250-8a6b-a78832a283c7",
+    "title": "WBA500",
+    "description": "",
+    "status": "In Progress",
+    "priority": "Low",
+    "dueDate": "2026-06-30",
+    "comments": [],
+    "createdAt": "2026-05-28T12:27:38.861Z"
+  },
+  {
+    "id": "d48b782b-6f5a-4643-8720-3e3f91c96529",
+    "title": "Accounting X Accounting",
+    "description": "",
+    "status": "Backlog",
+    "priority": "Low",
+    "dueDate": "2026-06-30",
+    "comments": [],
+    "createdAt": "2026-05-29T13:42:19.654Z"
   }
 ]
