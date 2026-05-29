@@ -125,7 +125,7 @@
     "description": "",
     "status": "In Progress",
     "priority": "Low",
-    "dueDate": "2026-06-30",
+    "dueDate": null,
     "comments": [],
     "createdAt": "2026-05-28T12:27:18.682Z"
   },
