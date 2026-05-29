@@ -95,7 +95,7 @@
     "description": "",
     "status": "Backlog",
     "priority": "Low",
-    "dueDate": "2026-06-30",
+    "dueDate": null,
     "comments": [],
     "createdAt": "2026-05-26T13:54:09.047Z"
   },
