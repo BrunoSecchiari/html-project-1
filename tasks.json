@@ -15,7 +15,7 @@
     "description": "Develop the AskEPM agentic solution by leveraging the SQL logic and data structures used in the Accounts Payable Dashboard and its associated drill-through reports in IBM Cognos Analytics. The initiative will integrate IBM watsonx Orchestrate to enable conversational access to Accounts Payable data, allowing users to retrieve information, generate analyses, and obtain actionable insights through natural language interactions.\n\nThe initial phase focuses on extracting and operationalizing the SQL queries behind the dashboard and detailed Ledger and ARIBA reports to ensure accurate data retrieval and analytical capabilities within AskEPM.\n\nOnce the analytical workflows are validated, the solution will be extended to interact with external enterprise applications such as Microsoft Outlook and Slack to automate downstream actions, notifications, and business processes based on the generated insights and analysis outcomes.",
     "status": "In Progress",
     "priority": "High",
-    "dueDate": "2026-06-05",
+    "dueDate": "2026-06-17",
     "comments": [],
     "createdAt": "2026-05-22T16:58:17.996Z"
   },
