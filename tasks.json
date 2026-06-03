@@ -56,7 +56,15 @@
     "status": "Backlog",
     "priority": "Medium",
     "dueDate": null,
-    "comments": [],
+    "comments": [
+      {
+        "id": "7e92a77f-5a43-4ffa-9b78-f81d550921de",
+        "authorFirstName": "Bruno",
+        "authorLastName": "Secchiari",
+        "text": "Validate the accuracy of the historical data, for which each journal entry was assigned manually based on the role held by the accountant who submitted it.",
+        "timestamp": "2026-06-03T13:18:58.148Z"
+      }
+    ],
     "createdAt": "2026-05-22T17:32:18.376Z"
   },
   {
