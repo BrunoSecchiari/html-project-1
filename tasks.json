@@ -84,7 +84,15 @@
     "status": "Backlog",
     "priority": "Medium",
     "dueDate": null,
-    "comments": [],
+    "comments": [
+      {
+        "id": "335baf32-6613-4961-b110-e4bbea45e92f",
+        "authorFirstName": "Bruno",
+        "authorLastName": "Secchiari",
+        "text": "Validate the accuracy of the historical data, for which each reconciliation was manually assigned based on the role held by the accountant who certified it.",
+        "timestamp": "2026-06-03T13:20:21.071Z"
+      }
+    ],
     "createdAt": "2026-05-22T17:50:26.732Z"
   },
   {
