@@ -178,7 +178,7 @@
   {
     "id": "4ae45784-9dc8-41eb-a7cc-a352ca8cddd1",
     "title": "Reconciliations Assignment Logic",
-    "description": "Update the robot assignment logic for automation-generated journal entries to determine the management chain based solely on the automation owner's current organizational hierarchy. The existing approach relies on both the automation owner and the journal entry posting date to reconstruct the management chain. However, because historical ownership records are not maintained, this methodology cannot be applied consistently. Since each automation remains associated with the same business process and department over time, the assignment should instead use the automation's current owner and their current management structure, regardless of the journal entry posting date.",
+    "description": "",
     "status": "Backlog",
     "priority": "High",
     "dueDate": "2026-07-20",
