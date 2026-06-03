@@ -168,7 +168,7 @@
   {
     "id": "00e23057-c42e-498f-a4dc-42987fad3856",
     "title": "Robot Assignment Logic",
-    "description": "**Robot Assignment Logic:** Update the assignment logic for automation-generated journal entries to use the automation owner's current management hierarchy, regardless of the journal entry posting date. This eliminates the need for historical ownership records while maintaining alignment with the automation's associated business process.",
+    "description": "Update the assignment logic for automation-generated journal entries to use the automation owner's current management hierarchy, regardless of the journal entry posting date. This eliminates the need for historical ownership records while maintaining alignment with the automation's associated business process.",
     "status": "Backlog",
     "priority": "High",
     "dueDate": "2026-07-20",
