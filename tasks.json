@@ -21,7 +21,7 @@
   },
   {
     "id": "00a7ccfa-dc86-4334-b436-150c3767bd93",
-    "title": "Accounts Payable Dashboard",
+    "title": "Accounts Payable Dashboard - MVP1",
     "description": "Design and develop an Accounts Payable Dashboard in IBM Cognos Analytics to provide visibility into the primary balance drivers within the Accounts Payable department. The dashboard will enable users to analyze key payable metrics and perform drill-through operations to supporting detailed reports, including:\n\nA Ledger detail report containing all relevant accounting fields.\nAn ARIBA detail report focused on transaction-level procurement and invoice information extracted from ARIBA.\n\nThe solution aims to improve financial analysis, transparency, and operational decision-making through interactive reporting capabilities.",
     "status": "In Progress",
     "priority": "High",
