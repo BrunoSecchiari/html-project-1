@@ -184,5 +184,15 @@
     "dueDate": "2026-07-20",
     "comments": [],
     "createdAt": "2026-06-03T13:58:35.325Z"
+  },
+  {
+    "id": "8431c222-efa4-4c57-b61d-adf5a76e3c07",
+    "title": "SquadSpot Database Connection",
+    "description": "",
+    "status": "Backlog",
+    "priority": "Medium",
+    "dueDate": "2026-08-31",
+    "comments": [],
+    "createdAt": "2026-06-10T13:49:45.026Z"
   }
 ]
