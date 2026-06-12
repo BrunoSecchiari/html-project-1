@@ -73,7 +73,7 @@
     "description": "Review and transition the data logic for the WF360 Data Package in IBM Cognos Analytics by engaging with the relevant stakeholders to validate the recreation of queries for key performance metrics, including % Transfers In and % FTE Reduction.\n\nThe objective is to migrate from the current EPM Self Serve data package to the WF360 data package, ensuring that all calculations remain accurate, consistent, and aligned with business definitions during and after the transition.\n\nThis includes validating query structure, confirming data availability, and ensuring continuity of reporting logic across both data sources.",
     "status": "In Progress",
     "priority": "Medium",
-    "dueDate": "2026-06-01",
+    "dueDate": "2026-07-20",
     "comments": [],
     "createdAt": "2026-05-22T17:33:17.455Z"
   },
