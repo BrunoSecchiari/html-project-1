@@ -34,7 +34,7 @@
     "title": "iERP Journal Entries",
     "description": "Apply the iERP Journal Entries matching process in IBM Cognos Analytics to link automated journal entry vouchers with their corresponding preparers and approvers. The solution will consolidate ledger and robot output data (from both legacy ATA and IBM RPA processes) using standardized unique identifiers and mapping logic. It will ensure consistent voucher attribution across systems, improving traceability, auditability, and reporting accuracy for automated journal entries.",
     "status": "Backlog",
-    "priority": "Medium",
+    "priority": "High",
     "dueDate": "2026-07-20",
     "comments": [],
     "createdAt": "2026-05-22T17:31:37.570Z"
