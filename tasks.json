@@ -45,7 +45,7 @@
     "description": "Ensure that Jobotx-generated automated journal entries are correctly identified, flagged, and consistently treated as automated journals in IBM Cognos Analytics reporting from 2QÃ¢ÂÂ26 onward. This includes aligning their classification with existing automation logic to ensure accurate reporting and exclusion/inclusion in relevant financial metrics and dashboards.",
     "status": "Backlog",
     "priority": "Medium",
-    "dueDate": "2026-06-30",
+    "dueDate": "2026-07-20",
     "comments": [],
     "createdAt": "2026-05-22T17:31:42.410Z"
   },
