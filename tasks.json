@@ -198,7 +198,7 @@
   {
     "id": "59428574-91e2-4758-90d9-06197fe7f34b",
     "title": "TaskSphere Database Connection",
-    "description": "",
+    "description": "Establish a secure and scalable integration between EPM and the TaskSphere PostgreSQL database to enable the automated extraction and synchronization of budget and squad goals data. The initiative will focus on identifying, mapping, and validating the relevant data structures required to support enterprise reporting needs while ensuring data consistency and governance standards.\n\nThe extracted data will be utilized to populate both the Accounting Executive Dashboard and the Directors' Scorecard, enabling comprehensive visibility into budget execution, strategic objectives, and operational performance across the organization. The solution will automate data ingestion and refresh cycles, reducing manual reporting efforts while ensuring stakeholders have access to reliable, current, and actionable information for performance monitoring and decision-making.",
     "status": "Backlog",
     "priority": "Medium",
     "dueDate": "2026-09-30",
