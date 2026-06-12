@@ -188,7 +188,7 @@
   {
     "id": "8431c222-efa4-4c57-b61d-adf5a76e3c07",
     "title": "SquadSpot Database Connection",
-    "description": "",
+    "description": "Establish a secure and scalable integration between EPM and the SquadSpot PostgreSQL database to enable the automated extraction and synchronization of budget and squad goals data. The initiative will focus on identifying, mapping, and validating the relevant data structures required to support enterprise reporting needs while ensuring data consistency and governance standards.\n\nThe extracted data will serve as a primary source for both the Accounting Executive Dashboard and the Directors' Scorecard, providing timely visibility into budget performance, goal attainment, and key operational metrics. The solution will automate data refresh processes, minimize manual intervention, and ensure that reporting assets are populated with accurate and up-to-date information to support executive decision-making and performance management.",
     "status": "Backlog",
     "priority": "Medium",
     "dueDate": "2026-09-30",
