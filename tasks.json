@@ -159,9 +159,9 @@
     "id": "dfeeff4f-b400-43db-988c-69c37c91ec97",
     "title": "AED - Budget Tile",
     "description": "Coordinate review sessions with the business owners of the Budget tile in IBM Cognos Analytics to validate and update dashboard visualizations. The scope includes ensuring that all Budget and Goals data sourced from the SquadSpot database is accurately reflected, identifying and resolving any data inconsistencies, and confirming that associated drill-through reports function correctly to enable end users to access supporting transactional detail.",
-    "status": "In Progress",
-    "priority": "Medium",
-    "dueDate": null,
+    "status": "Completed",
+    "priority": "Low",
+    "dueDate": "2026-06-01",
     "comments": [],
     "createdAt": "2026-05-29T14:00:02.098Z"
   },
