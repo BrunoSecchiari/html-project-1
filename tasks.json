@@ -204,5 +204,15 @@
     "dueDate": "2026-08-31",
     "comments": [],
     "createdAt": "2026-06-10T13:49:58.986Z"
+  },
+  {
+    "id": "932b2f37-3ba9-4de2-a633-c1352ab4d5c4",
+    "title": "Alison Yara's Presentation",
+    "description": "Prepare and present the target architecture for an agentic Accounts Payable reporting solution during the upcoming session with Chief Accountant Alison Yara. The presentation should cover the end-to-end process, including identification of the top balance drivers across financial accounts and vendors, automated outreach to relevant requestors via Outlook (SMTP) to enrich and validate data quality, generation of a standardized Excel report based on the provided template, and automated report delivery to Box through the available API. The presentation should also outline the planned roadmap for iterative enhancements each sprint, with the objective of evolving the solution into a comprehensive reporting capability that supports the Accounts Payable team's CHQ reporting responsibilities.",
+    "status": "In Progress",
+    "priority": "High",
+    "dueDate": "2026-06-17",
+    "comments": [],
+    "createdAt": "2026-06-12T12:23:20.162Z"
   }
 ]
