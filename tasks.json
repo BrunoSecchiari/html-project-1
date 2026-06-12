@@ -53,9 +53,9 @@
     "id": "62d28bab-2bcb-402c-ba1b-bc27397ed677",
     "title": "AED - Journals Tile",
     "description": "Coordinate review sessions with the business owners of the Journals tile in IBM Cognos Analytics to validate and update dashboard visualizations. The scope includes ensuring that all required data is accurately reflected, identifying and resolving any data inconsistencies, and confirming that associated drill-through reports function correctly to enable end users to access supporting transactional detail.",
-    "status": "In Progress",
+    "status": "Completed",
     "priority": "Low",
-    "dueDate": "2026-06-30",
+    "dueDate": "2026-06-01",
     "comments": [
       {
         "id": "7e92a77f-5a43-4ffa-9b78-f81d550921de",
