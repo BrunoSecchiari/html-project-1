@@ -217,7 +217,7 @@
   },
   {
     "id": "1a2bed28-2c0c-4b9c-8bb4-04f5124760d7",
-    "title": "IBM Bob",
+    "title": "Agentic AI w/ IBM Bob",
     "description": "Develop the IBM Bob agentic solution by leveraging the SQL logic, data structures, and reporting framework used in the Accounts Payable Dashboard and its associated drill-through reports in IBM Cognos Analytics. The initiative will utilize IBM watsonx Orchestrate to enable intelligent analysis of Accounts Payable balances, allowing users to identify key balance drivers, analyze vendor and account-level trends, and generate actionable insights through natural language interactions.\n\nThe initial phase will focus on extracting and operationalizing the SQL queries and business logic behind the dashboard, Ledger reports, and ARIBA reports to ensure accurate data retrieval and analytical capabilities within IBM Bob. Special emphasis will be placed on identifying the financial accounts and vendors driving outstanding balances and providing drill-down analysis to support reporting and decision-making.\n\nFollowing validation of the analytical workflows, the solution will be enhanced to automate data enrichment activities by engaging relevant requestors through Microsoft Outlook (SMTP) to collect missing or clarifying information. The enriched data will then be used to generate a standardized Excel report based on a predefined template and automatically upload the completed report to Box via its API.\n\nThe solution will be incrementally enhanced through subsequent sprints, expanding reporting capabilities, automation, and data quality controls until it fully supports the Accounts Payable team's CHQ reporting requirements and operational processes.",
     "status": "In Progress",
     "priority": "High",
