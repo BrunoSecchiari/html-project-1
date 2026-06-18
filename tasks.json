@@ -179,7 +179,7 @@
     "id": "4ae45784-9dc8-41eb-a7cc-a352ca8cddd1",
     "title": "Reconciliations Assignment Logic",
     "description": "Update the reconciliation assignment logic to use the approver's current management hierarchy instead of the preparer's. This avoids inaccuracies caused by preparers moving between departments.",
-    "status": "Backlog",
+    "status": "In Progress",
     "priority": "Medium",
     "dueDate": "2026-07-20",
     "comments": [],
