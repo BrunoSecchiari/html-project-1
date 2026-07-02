@@ -234,5 +234,15 @@
     "dueDate": null,
     "comments": [],
     "createdAt": "2026-06-12T12:25:08.792Z"
+  },
+  {
+    "id": "edced876-a199-4777-b2d6-87efc3b357d8",
+    "title": "Director's Scorecard - MVP2",
+    "description": "",
+    "status": "In Progress",
+    "priority": "High",
+    "dueDate": "2026-07-13",
+    "comments": [],
+    "createdAt": "2026-07-02T19:34:36.471Z"
   }
 ]
