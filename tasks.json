@@ -30,16 +30,6 @@
     "createdAt": "2026-05-22T16:58:30.291Z"
   },
   {
-    "id": "ae385bb5-5338-4181-83c8-e4d80671e07a",
-    "title": "iERP Journal Entries",
-    "description": "Apply the iERP Journal Entries matching process in IBM Cognos Analytics to link automated journal entry vouchers with their corresponding preparers and approvers. The solution will consolidate ledger and robot output data (from both legacy ATA and IBM RPA processes) using standardized unique identifiers and mapping logic. It will ensure consistent voucher attribution across systems, improving traceability, auditability, and reporting accuracy for automated journal entries.",
-    "status": "In Progress",
-    "priority": "Medium",
-    "dueDate": "2026-07-31",
-    "comments": [],
-    "createdAt": "2026-05-22T17:31:37.570Z"
-  },
-  {
     "id": "39a0683f-f285-48c8-a781-77f96630e361",
     "title": "Jobotx",
     "description": "Ensure that Jobotx-generated automated journal entries are correctly identified, flagged, and consistently treated as automated journals in IBM Cognos Analytics reporting from 2QÃ¢ÂÂ26 onward. This includes aligning their classification with existing automation logic to ensure accurate reporting and exclusion/inclusion in relevant financial metrics and dashboards.",
