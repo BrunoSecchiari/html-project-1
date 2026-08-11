@@ -11,33 +11,23 @@
   },
   {
     "id": "764254eb-5e89-45c9-bd0a-4a215afafee7",
-    "title": "AskEPM",
+    "title": "Agent w/ AskEPM - MVP1",
     "description": "Develop the AskEPM agentic solution by leveraging the SQL logic and data structures used in the Accounts Payable Dashboard and its associated drill-through reports in IBM Cognos Analytics. The initiative will integrate IBM watsonx Orchestrate to enable conversational access to Accounts Payable data, allowing users to retrieve information, generate analyses, and obtain actionable insights through natural language interactions.\n\nThe initial phase focuses on extracting and operationalizing the SQL queries behind the dashboard and detailed Ledger and ARIBA reports to ensure accurate data retrieval and analytical capabilities within AskEPM.\n\nOnce the analytical workflows are validated, the solution will be extended to interact with external enterprise applications such as Microsoft Outlook and Slack to automate downstream actions, notifications, and business processes based on the generated insights and analysis outcomes.",
-    "status": "In Progress",
+    "status": "Backlog",
     "priority": "High",
-    "dueDate": "2026-06-05",
+    "dueDate": "2026-09-30",
     "comments": [],
     "createdAt": "2026-05-22T16:58:17.996Z"
   },
   {
     "id": "00a7ccfa-dc86-4334-b436-150c3767bd93",
-    "title": "Accounts Payable Dashboard",
+    "title": "Accounts Payable Dashboard - MVP1",
     "description": "Design and develop an Accounts Payable Dashboard in IBM Cognos Analytics to provide visibility into the primary balance drivers within the Accounts Payable department. The dashboard will enable users to analyze key payable metrics and perform drill-through operations to supporting detailed reports, including:\n\nA Ledger detail report containing all relevant accounting fields.\nAn ARIBA detail report focused on transaction-level procurement and invoice information extracted from ARIBA.\n\nThe solution aims to improve financial analysis, transparency, and operational decision-making through interactive reporting capabilities.",
     "status": "In Progress",
     "priority": "High",
-    "dueDate": "2026-05-29",
+    "dueDate": "2026-08-07",
     "comments": [],
     "createdAt": "2026-05-22T16:58:30.291Z"
-  },
-  {
-    "id": "ae385bb5-5338-4181-83c8-e4d80671e07a",
-    "title": "iERP Journal Entries",
-    "description": "Apply the iERP Journal Entries matching process in IBM Cognos Analytics to link automated journal entry vouchers with their corresponding preparers and approvers. The solution will consolidate ledger and robot output data (from both legacy ATA and IBM RPA processes) using standardized unique identifiers and mapping logic. It will ensure consistent voucher attribution across systems, improving traceability, auditability, and reporting accuracy for automated journal entries.",
-    "status": "Backlog",
-    "priority": "Medium",
-    "dueDate": "2026-06-30",
-    "comments": [],
-    "createdAt": "2026-05-22T17:31:37.570Z"
   },
   {
     "id": "39a0683f-f285-48c8-a781-77f96630e361",
@@ -45,37 +35,35 @@
     "description": "Ensure that Jobotx-generated automated journal entries are correctly identified, flagged, and consistently treated as automated journals in IBM Cognos Analytics reporting from 2QÃ¢ÂÂ26 onward. This includes aligning their classification with existing automation logic to ensure accurate reporting and exclusion/inclusion in relevant financial metrics and dashboards.",
     "status": "Backlog",
     "priority": "Medium",
-    "dueDate": "2026-06-30",
+    "dueDate": "2026-09-30",
     "comments": [],
     "createdAt": "2026-05-22T17:31:42.410Z"
   },
   {
     "id": "62d28bab-2bcb-402c-ba1b-bc27397ed677",
-    "title": "AED - Journal Entries Tile",
-    "description": "Coordinate review sessions with the business owners of the Journal Entries tile in IBM Cognos Analytics to validate and update dashboard visualizations. The scope includes ensuring that all required data is accurately reflected, identifying and resolving any data inconsistencies, and confirming that associated drill-through reports function correctly to enable end users to access supporting transactional detail.",
-    "status": "Backlog",
-    "priority": "Medium",
-    "dueDate": null,
-    "comments": [],
+    "title": "AED - Journals Tile",
+    "description": "Coordinate review sessions with the business owners of the Journals tile in IBM Cognos Analytics to validate and update dashboard visualizations. The scope includes ensuring that all required data is accurately reflected, identifying and resolving any data inconsistencies, and confirming that associated drill-through reports function correctly to enable end users to access supporting transactional detail.",
+    "status": "Completed",
+    "priority": "Low",
+    "dueDate": "2026-06-01",
+    "comments": [
+      {
+        "id": "7e92a77f-5a43-4ffa-9b78-f81d550921de",
+        "authorFirstName": "Bruno",
+        "authorLastName": "Secchiari",
+        "text": "Validate the accuracy of the historical data, for which each journal entry was assigned manually based on the role held by the accountant who submitted it.",
+        "timestamp": "2026-06-03T13:18:58.148Z"
+      }
+    ],
     "createdAt": "2026-05-22T17:32:18.376Z"
   },
   {
-    "id": "101f10dc-cad4-4d06-9e0a-3bfca4942d76",
-    "title": "AED - Business Owners",
-    "description": "Define and assign business ownership for each tile within the Accounting Executive Dashboard (AED) in IBM Cognos Analytics. This initiative aims to establish clear accountability by identifying the responsible business owner for each reporting area, ensuring that the data presented is accurate, validated, and consistently maintained.\n\nThe assigned business owners will be responsible for reviewing data quality, validating metric definitions and calculations, and coordinating any required updates or corrections to support reliable executive reporting and decision-making.",
-    "status": "Backlog",
-    "priority": "Medium",
-    "dueDate": "2026-05-29",
-    "comments": [],
-    "createdAt": "2026-05-22T17:32:38.009Z"
-  },
-  {
     "id": "e3018647-156e-457a-ad4b-a7364a1fc12b",
-    "title": "DS - WF360 Data Package",
-    "description": "Review and transition the data logic for the DS - WF360 Data Package in IBM Cognos Analytics by engaging with the relevant stakeholders to validate the recreation of queries for key performance metrics, including % Transfers In and % FTE Reduction.\n\nThe objective is to migrate from the current EPM Self Serve data package to the WF360 data package, ensuring that all calculations remain accurate, consistent, and aligned with business definitions during and after the transition.\n\nThis includes validating query structure, confirming data availability, and ensuring continuity of reporting logic across both data sources.",
-    "status": "In Progress",
+    "title": "WF360 Data Package",
+    "description": "Review and transition the data logic for the WF360 Data Package in IBM Cognos Analytics by engaging with the relevant stakeholders to validate the recreation of queries for key performance metrics, including % Transfers In and % FTE Reduction.\n\nThe objective is to migrate from the current EPM Self Serve data package to the WF360 data package, ensuring that all calculations remain accurate, consistent, and aligned with business definitions during and after the transition.\n\nThis includes validating query structure, confirming data availability, and ensuring continuity of reporting logic across both data sources.",
+    "status": "Completed",
     "priority": "Medium",
-    "dueDate": "2026-06-05",
+    "dueDate": "2026-07-31",
     "comments": [],
     "createdAt": "2026-05-22T17:33:17.455Z"
   },
@@ -83,10 +71,18 @@
     "id": "4bef4f9a-7592-4755-ba84-f15243eaa811",
     "title": "AED - Items/Reconciliations Tile",
     "description": "Coordinate review sessions with the business owners of the Items/Reconciliations tile in IBM Cognos Analytics to validate and update dashboard visualizations. The scope includes ensuring that all required data is accurately reflected, identifying and resolving any data inconsistencies, and confirming that associated drill-through reports function correctly to enable end users to access supporting transactional detail.",
-    "status": "Backlog",
-    "priority": "Medium",
-    "dueDate": null,
-    "comments": [],
+    "status": "Completed",
+    "priority": "Low",
+    "dueDate": "2026-06-01",
+    "comments": [
+      {
+        "id": "335baf32-6613-4961-b110-e4bbea45e92f",
+        "authorFirstName": "Bruno",
+        "authorLastName": "Secchiari",
+        "text": "Validate the accuracy of the historical data, for which each reconciliation was manually assigned based on the role held by the accountant who certified it.",
+        "timestamp": "2026-06-03T13:20:21.071Z"
+      }
+    ],
     "createdAt": "2026-05-22T17:50:26.732Z"
   },
   {
@@ -95,7 +91,7 @@
     "description": "",
     "status": "Backlog",
     "priority": "Low",
-    "dueDate": "2026-06-30",
+    "dueDate": null,
     "comments": [],
     "createdAt": "2026-05-26T13:54:09.047Z"
   },
@@ -105,7 +101,7 @@
     "description": "",
     "status": "Backlog",
     "priority": "Low",
-    "dueDate": "2026-06-30",
+    "dueDate": null,
     "comments": [],
     "createdAt": "2026-05-26T13:55:09.165Z"
   },
@@ -113,9 +109,9 @@
     "id": "3555f454-b2b3-480d-956e-a24712c11144",
     "title": "ODA267",
     "description": "",
-    "status": "Backlog",
+    "status": "Completed",
     "priority": "Low",
-    "dueDate": "2026-06-30",
+    "dueDate": null,
     "comments": [],
     "createdAt": "2026-05-26T13:55:24.777Z"
   },
@@ -125,7 +121,7 @@
     "description": "",
     "status": "In Progress",
     "priority": "Low",
-    "dueDate": "2026-06-30",
+    "dueDate": null,
     "comments": [],
     "createdAt": "2026-05-28T12:27:18.682Z"
   },
@@ -135,18 +131,108 @@
     "description": "",
     "status": "In Progress",
     "priority": "Low",
-    "dueDate": "2026-06-30",
+    "dueDate": null,
     "comments": [],
     "createdAt": "2026-05-28T12:27:38.861Z"
   },
   {
     "id": "d48b782b-6f5a-4643-8720-3e3f91c96529",
     "title": "Accounting X Accounting",
-    "description": "",
+    "description": "Design and deliver an internal presentation introducing the Data Intelligence team to the rest of the organization. The presentation will walk attendees through who we are and what we stand for, the tools we rely on day-to-day, and the technology stack that powers our work. The goal is to give colleagues across the business a clear and engaging picture of what our team does, how we do it, and how we can collaborate more effectively together.",
     "status": "Backlog",
     "priority": "Low",
-    "dueDate": "2026-06-30",
+    "dueDate": "2026-07-22",
     "comments": [],
     "createdAt": "2026-05-29T13:42:19.654Z"
+  },
+  {
+    "id": "dfeeff4f-b400-43db-988c-69c37c91ec97",
+    "title": "AED - Budget Tile",
+    "description": "Coordinate review sessions with the business owners of the Budget tile in IBM Cognos Analytics to validate and update dashboard visualizations. The scope includes ensuring that all Budget and Goals data sourced from the SquadSpot database is accurately reflected, identifying and resolving any data inconsistencies, and confirming that associated drill-through reports function correctly to enable end users to access supporting transactional detail.",
+    "status": "Completed",
+    "priority": "Low",
+    "dueDate": "2026-06-01",
+    "comments": [],
+    "createdAt": "2026-05-29T14:00:02.098Z"
+  },
+  {
+    "id": "00e23057-c42e-498f-a4dc-42987fad3856",
+    "title": "Journal Entries Assignment Logic",
+    "description": "Update the assignment logic for automation-generated journal entries to use the automation owner's current management hierarchy, regardless of the journal entry posting date. This eliminates the need for historical ownership records while maintaining alignment with the automation's associated business process.",
+    "status": "Completed",
+    "priority": "Medium",
+    "dueDate": "2026-07-31",
+    "comments": [],
+    "createdAt": "2026-06-03T13:58:22.149Z"
+  },
+  {
+    "id": "4ae45784-9dc8-41eb-a7cc-a352ca8cddd1",
+    "title": "Reconciliations Assignment Logic",
+    "description": "Update the reconciliation assignment logic to use the approver's current management hierarchy instead of the preparer's. This avoids inaccuracies caused by preparers moving between departments.",
+    "status": "Completed",
+    "priority": "Medium",
+    "dueDate": "2026-07-31",
+    "comments": [],
+    "createdAt": "2026-06-03T13:58:35.325Z"
+  },
+  {
+    "id": "8431c222-efa4-4c57-b61d-adf5a76e3c07",
+    "title": "SquadSpot Database Connection",
+    "description": "Establish a secure and scalable integration between EPM and the SquadSpot PostgreSQL database to enable the automated extraction and synchronization of budget and squad goals data. The initiative will focus on identifying, mapping, and validating the relevant data structures required to support enterprise reporting needs while ensuring data consistency and governance standards.\n\nThe extracted data will serve as a primary source for both the Accounting Executive Dashboard and the Directors' Scorecard, providing timely visibility into budget performance, goal attainment, and key operational metrics. The solution will automate data refresh processes, minimize manual intervention, and ensure that reporting assets are populated with accurate and up-to-date information to support executive decision-making and performance management.",
+    "status": "Backlog",
+    "priority": "Medium",
+    "dueDate": "2026-09-30",
+    "comments": [],
+    "createdAt": "2026-06-10T13:49:45.026Z"
+  },
+  {
+    "id": "59428574-91e2-4758-90d9-06197fe7f34b",
+    "title": "TaskSphere Database Connection",
+    "description": "Establish a secure and scalable integration between EPM and the TaskSphere PostgreSQL database to enable the automated extraction and synchronization of budget and squad goals data. The initiative will focus on identifying, mapping, and validating the relevant data structures required to support enterprise reporting needs while ensuring data consistency and governance standards.\n\nThe extracted data will be utilized to populate both the Accounting Executive Dashboard and the Directors' Scorecard, enabling comprehensive visibility into budget execution, strategic objectives, and operational performance across the organization. The solution will automate data ingestion and refresh cycles, reducing manual reporting efforts while ensuring stakeholders have access to reliable, current, and actionable information for performance monitoring and decision-making.",
+    "status": "Backlog",
+    "priority": "Medium",
+    "dueDate": "2026-09-30",
+    "comments": [],
+    "createdAt": "2026-06-10T13:49:58.986Z"
+  },
+  {
+    "id": "932b2f37-3ba9-4de2-a633-c1352ab4d5c4",
+    "title": "Alison Yara's Presentation",
+    "description": "Prepare and present the target architecture for an agentic Accounts Payable reporting solution during the upcoming session with Chief Accountant Alison Yara. The presentation should cover the end-to-end process, including identification of the top balance drivers across financial accounts and vendors, automated outreach to relevant requestors via Outlook (SMTP) to enrich and validate data quality, generation of a standardized Excel report based on the provided template, and automated report delivery to Box through the available API. The presentation should also outline the planned roadmap for iterative enhancements each sprint, with the objective of evolving the solution into a comprehensive reporting capability that supports the Accounts Payable team's CHQ reporting responsibilities.",
+    "status": "Completed",
+    "priority": "High",
+    "dueDate": "2026-06-17",
+    "comments": [],
+    "createdAt": "2026-06-12T12:23:20.162Z"
+  },
+  {
+    "id": "1a2bed28-2c0c-4b9c-8bb4-04f5124760d7",
+    "title": "Agent w/ IBM Bob - MVP1",
+    "description": "Develop the IBM Bob agentic solution by leveraging the SQL logic, data structures, and reporting framework used in the Accounts Payable Dashboard and its associated drill-through reports in IBM Cognos Analytics. The initiative will utilize IBM watsonx Orchestrate to enable intelligent analysis of Accounts Payable balances, allowing users to identify key balance drivers, analyze vendor and account-level trends, and generate actionable insights through natural language interactions.\n\nThe initial phase will focus on extracting and operationalizing the SQL queries and business logic behind the dashboard, Ledger reports, and ARIBA reports to ensure accurate data retrieval and analytical capabilities within IBM Bob. Special emphasis will be placed on identifying the financial accounts and vendors driving outstanding balances and providing drill-down analysis to support reporting and decision-making.\n\nFollowing validation of the analytical workflows, the solution will be enhanced to automate data enrichment activities by engaging relevant requestors through Microsoft Outlook (SMTP) to collect missing or clarifying information. The enriched data will then be used to generate a standardized Excel report based on a predefined template and automatically upload the completed report to Box via its API.\n\nThe solution will be incrementally enhanced through subsequent sprints, expanding reporting capabilities, automation, and data quality controls until it fully supports the Accounts Payable team's CHQ reporting requirements and operational processes.",
+    "status": "In Progress",
+    "priority": "High",
+    "dueDate": "2026-08-07",
+    "comments": [],
+    "createdAt": "2026-06-12T12:24:30.307Z"
+  },
+  {
+    "id": "7012cae7-8414-436e-a5fd-35326dcd90e6",
+    "title": "ODA257",
+    "description": "",
+    "status": "Completed",
+    "priority": "Low",
+    "dueDate": null,
+    "comments": [],
+    "createdAt": "2026-06-12T12:25:08.792Z"
+  },
+  {
+    "id": "edced876-a199-4777-b2d6-87efc3b357d8",
+    "title": "Director's Scorecard - MVP2",
+    "description": "Design and develop MVP2 of the Director's Scorecard report in IBM Cognos Analytics, building on the standardized and objective framework established for measuring the performance of directors and managers across towers and departments. This phase focuses on implementing the improvements gathered over the past several months through feedback from directors and managers, refining the scorecard to better reflect real-world usage and reporting needs.",
+    "status": "Completed",
+    "priority": "High",
+    "dueDate": "2026-07-31",
+    "comments": [],
+    "createdAt": "2026-07-02T19:34:36.471Z"
   }
 ]
