@@ -234,5 +234,15 @@
     "dueDate": "2026-07-31",
     "comments": [],
     "createdAt": "2026-07-02T19:34:36.471Z"
+  },
+  {
+    "id": "dd16e9c7-3f2a-4c93-87ae-5907d9210ade",
+    "title": "Director's Scorecard - MVP3",
+    "description": "Design and develop MVP3 of the Director's Scorecard report in IBM Cognos Analytics, building on the standardized and objective framework established for measuring the performance of directors and managers across towers and departments. This phase focuses on implementing the improvements gathered over the past several months through feedback from directors and managers, refining the scorecard to better reflect real-world usage and reporting needs.",
+    "status": "In Progress",
+    "priority": "High",
+    "dueDate": "2026-10-15",
+    "comments": [],
+    "createdAt": "2026-08-21T12:50:44.225Z"
   }
 ]
