@@ -238,7 +238,7 @@
   {
     "id": "f8b7f95d-d097-4a0f-a556-56949a21bd91",
     "title": "Budget w/ IBM Bob - MVP1",
-    "description": "",
+    "description": "Design and develop the IBM Bob agentic solution to provide executives with intelligent visibility into tower and squad budget planning. The solution will leverage IBM watsonx Orchestrate to analyze planning data from the Squadspot database and enable natural language interactions, including the bridging of 2026 forecasts with 2027 budget planners by tower, squad, and employee, analysis of key budget drivers such as salary increases, attrition, new hires, and productivity targets, and drill-down reporting.\n\nThe solution aims to improve budget planning accuracy, transparency, and decision-making through interactive, AI-driven reporting capabilities. It will also be incrementally enhanced through subsequent sprints until it fully supports the annual budget planning cycle.",
     "status": "In Progress",
     "priority": "High",
     "dueDate": "2026-09-30",
