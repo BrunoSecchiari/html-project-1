@@ -196,16 +196,6 @@
     "createdAt": "2026-06-12T12:23:20.162Z"
   },
   {
-    "id": "1a2bed28-2c0c-4b9c-8bb4-04f5124760d7",
-    "title": "Accounts Payable w/ IBM Bob - MVP1",
-    "description": "Develop the IBM Bob agentic solution to provide the Accounts Payable team with intelligent visibility into outstanding balances and their key drivers. The solution will leverage IBM watsonx Orchestrate to analyze data, enabling natural language interactions including the identification of key balance drivers, analysis of vendor and account-level trends, and drill-down reporting to support decision-making.\n\nFollowing validation, the solution will be enhanced to automate data enrichment by engaging relevant requestors via Microsoft Outlook (SMTP) to collect missing or clarifying information, and to generate a standardized Excel report based on a predefined template, automatically uploaded to Box.\n\nThe solution aims to improve reporting accuracy, transparency, and operational efficiency through interactive, AI-driven capabilities. It will also be incrementally enhanced through subsequent sprints until it fully supports the Accounts Payable team's CHQ reporting requirements and operational processes.",
-    "status": "In Progress",
-    "priority": "High",
-    "dueDate": "2026-10-15",
-    "comments": [],
-    "createdAt": "2026-06-12T12:24:30.307Z"
-  },
-  {
     "id": "7012cae7-8414-436e-a5fd-35326dcd90e6",
     "title": "ODA257",
     "description": "",
