@@ -244,5 +244,15 @@
     "dueDate": "2026-09-30",
     "comments": [],
     "createdAt": "2026-09-15T13:00:06.266Z"
+  },
+  {
+    "id": "8720891c-85cd-4977-9006-63758dcf9724",
+    "title": "Accounting MCP Server - Training Program",
+    "description": "Distribute the Accounting MCP Server to a pilot group of accountants, organized by tower, enabling them to use it through IBM Bob to query accounting data in DB2 using natural language. The goal of this pilot is to have accountants train the solution by refining the knowledge the server provides to the model, including golden queries, domain rules, business context, skills, and documentation.\n\nTo make adoption easy for non-technical users, the solution includes a one-command installer for Windows and macOS that sets up all required components without administrator privileges and securely configures database access. Each accountant works on a dedicated branch, and their changes are automatically saved and synchronized to the repository without requiring any Git knowledge.\n\nAt the end of the program, contributions from each branch will be reviewed and merged into the main version, which will serve as the foundation for an organization-wide rollout based on a centralized, more scalable and secure architecture with individual credentials.",
+    "status": "In Progress",
+    "priority": "High",
+    "dueDate": "2026-10-15",
+    "comments": [],
+    "createdAt": "2026-09-29T20:33:55.592Z"
   }
 ]
