@@ -244,5 +244,15 @@
     "dueDate": "2026-10-15",
     "comments": [],
     "createdAt": "2026-09-29T20:33:55.592Z"
+  },
+  {
+    "id": "071a2f29-1eb5-4a65-b803-aeabbf02e4ea",
+    "title": "EPM Cognos Analytics - UIF",
+    "description": "Build a UIF pipeline that automatically loads files from a dedicated Box folder into EPM Cognos Analytics, removing the need to upload them manually. Files placed in the folder are picked up and loaded into Cognos, so the data stays up to date without anyone having to intervene.\n\nThe first use case is the Budget file generated from the SquadSpot database, which will be refreshed and loaded on a weekly basis. This initial implementation will serve to validate the end-to-end flow, from dropping a file into Box to having it available in Cognos.\n\nOnce the process is in place, it will be extended to other files, such as SquadSpot Goals, as well as datasets coming from other sources, like APIs and databases. Each file may follow its own refresh schedule, so the pipeline should support different load frequencies depending on the use case.",
+    "status": "In Progress",
+    "priority": "Medium",
+    "dueDate": "2026-12-31",
+    "comments": [],
+    "createdAt": "2026-09-29T21:14:47.204Z"
   }
 ]
