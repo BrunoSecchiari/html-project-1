@@ -254,5 +254,15 @@
     "dueDate": "2026-12-31",
     "comments": [],
     "createdAt": "2026-09-29T21:14:47.204Z"
+  },
+  {
+    "id": "979ab018-9da5-4b79-a370-5cd7f6d9a160",
+    "title": "Accounting MCP Server w/ AskEPM",
+    "description": "Migrate the Accounting MCP Server to AskEPM Atlas, the centralized semantic MCP server for the organization. This move replaces the local, per-user installation architecture with a single, governed service that any MCP-compatible agent, such as IBM Bob, can connect to.\n\nIn the current architecture, each accountant runs the server on their own machine with shared database credentials, and the model builds raw SQL queries guided by context files, golden queries, and domain rules. Atlas replaces this with a semantic layer of curated cubes, metrics, and dimensions, so agents send structured queries instead of writing SQL. Access is authenticated through w3id SSO, and every query runs under the individual user's identity.\n\nThe migration involves translating all the accounting knowledge into Atlas components: views, cubes, knowledge documents (business rules, glossary, metrics, and caveats), and Bob skills. Each component will be validated against the results of the current solution before being promoted through the test, pre-production, and production environments.",
+    "status": "In Progress",
+    "priority": "High",
+    "dueDate": "2026-10-15",
+    "comments": [],
+    "createdAt": "2026-09-29T21:22:43.478Z"
   }
 ]
