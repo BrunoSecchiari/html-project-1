@@ -201,7 +201,7 @@
     "description": "Develop the IBM Bob agentic solution to provide the Accounts Payable team with intelligent visibility into outstanding balances and their key drivers. The solution will leverage IBM watsonx Orchestrate to analyze data, enabling natural language interactions including the identification of key balance drivers, analysis of vendor and account-level trends, and drill-down reporting to support decision-making.\n\nFollowing validation, the solution will be enhanced to automate data enrichment by engaging relevant requestors via Microsoft Outlook (SMTP) to collect missing or clarifying information, and to generate a standardized Excel report based on a predefined template, automatically uploaded to Box.\n\nThe solution aims to improve reporting accuracy, transparency, and operational efficiency through interactive, AI-driven capabilities. It will also be incrementally enhanced through subsequent sprints until it fully supports the Accounts Payable team's CHQ reporting requirements and operational processes.",
     "status": "In Progress",
     "priority": "High",
-    "dueDate": "2026-09-30",
+    "dueDate": "2026-12-31",
     "comments": [],
     "createdAt": "2026-06-12T12:24:30.307Z"
   },
