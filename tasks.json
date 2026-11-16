@@ -254,5 +254,15 @@
     "dueDate": "2026-12-31",
     "comments": [],
     "createdAt": "2026-09-29T21:22:43.478Z"
+  },
+  {
+    "id": "d4543b1b-7d92-4186-94d5-055a97ccdba1",
+    "title": "NEXA - Architecture & GitHub Integration",
+    "description": "NEXA now runs locally on each accountant’s computer. IBM Bob starts the server directly on the user’s machine, using portable versions of Node.js and Java that the installer downloads, so no administrator rights or existing software are needed. The knowledge the model uses (context files, golden queries, QuickViews and the change log) lives in a dedicated knowledge/ folder. Any change takes effect as soon as the server is restarted in Bob. Database access stays read-only, and us-east is the default instance.\n\nThe GitHub integration is fully automated through Bob’s lifecycle hooks, so accountants never run Git commands or publish their changes manually. At the start of each task, NEXA pulls the latest updates for the accountant’s branch. At the end of each response, it commits and pushes only the approved knowledge files. Reports and files that Bob generates stay on the user’s computer in output-files/ and are never uploaded. If GitHub is unavailable, changes are saved locally and synced automatically when the connection returns. The installer also works offline from a repository bundle shared through Box.\n\nA dedicated “NEXA Training Program” mode can only edit knowledge files. It cannot run commands or change code, so every accountant works the same way and each contribution can be traced to its branch for review at the end of the program.",
+    "status": "Completed",
+    "priority": "High",
+    "dueDate": "2026-10-31",
+    "comments": [],
+    "createdAt": "2026-11-16T20:55:46.919Z"
   }
 ]
